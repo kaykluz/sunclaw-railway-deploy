@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>SunClaw — Just Ask SunClaw</title>
+    <meta name="description" content="SunClaw is the conversational operating system for renewable energy. AI-powered advisor, two-sided marketplace, and OpenClaw deployment — all through conversation." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Outfit:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Umami analytics — loads only when env vars are configured
+      (function() {
+        var scriptUrl = "%VITE_ANALYTICS_SCRIPT_URL%";
+        var websiteId = "%VITE_ANALYTICS_WEBSITE_ID%";
+        if (scriptUrl && websiteId && !scriptUrl.startsWith("%")) {
+          var s = document.createElement("script");
+          s.defer = true;
+          s.src = scriptUrl;
+          s.setAttribute("data-website-id", websiteId);
+          document.body.appendChild(s);
+        }
+      })();
+    </script>
+  </body>
+</html>

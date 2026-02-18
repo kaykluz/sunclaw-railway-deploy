@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, userId, typeof(fullLog) as type_check, LEFT(CAST(fullLog AS CHAR), 100) as log_preview, messageCount FROM agent_memory LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT id, userId, typeof(fullLog) as type_check, LEFT(CAST(fullLog AS CHAR), 100) as log_preview, messageCount FROM agent_memory LIMIT 5;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1305 (42000) at line 1: FUNCTION d2QvTgeTa2FRgRvDg8tGXK.typeof does not exist"
+  ]
+}

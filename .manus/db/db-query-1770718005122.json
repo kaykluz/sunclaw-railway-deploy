@@ -1,0 +1,16 @@
+{
+  "query": "SELECT id, status, externalUrl, CAST(metadata AS CHAR) as meta_str FROM deployments WHERE status = 'success' ORDER BY id DESC LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT id, status, externalUrl, CAST(metadata AS CHAR) as meta_str FROM deployments WHERE status = 'success' ORDER BY id DESC LIMIT 1;",
+  "rows": [
+    {
+      "id": "1",
+      "status": "success",
+      "externalUrl": "https://sunclaw-production-403d.up.railway.app",
+      "meta_str": "{\"domain\": \"sunclaw-production.up.railway.app\", \"railwayDeploymentId\": \"b9fb082c-73a2-4785-ab22-6120c8694cd5\", \"railwayEnvironmentId\": \"28626eec-b678-4c26-98fc-eabd1c9eb922\", \"railwayProjectId\": \"0f95b4f5-8476-45e7-992a-50732509b399\", \"railwayServiceId\": \"5075c404-1261-4f1e-a6aa-3d7160da0b34\"}"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tstatus\texternalUrl\tmeta_str\n1\tsuccess\thttps://sunclaw-production-403d.up.railway.app\t{\"domain\": \"sunclaw-production.up.railway.app\", \"railwayDeploymentId\": \"b9fb082c-73a2-4785-ab22-6120c8694cd5\", \"railwayEnvironmentId\": \"28626eec-b678-4c26-98fc-eabd1c9eb922\", \"railwayProjectId\": \"0f95b4f5-8476-45e7-992a-50732509b399\", \"railwayServiceId\": \"5075c404-1261-4f1e-a6aa-3d7160da0b34\"}\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

@@ -1,0 +1,26 @@
+{
+  "query": "SELECT 'agent_memory' as table_name, (SELECT COUNT(*) FROM agent_memory) as row_count UNION ALL SELECT 'failover_logs', (SELECT COUNT(*) FROM failover_logs) UNION ALL SELECT 'token_usage', (SELECT COUNT(*) FROM token_usage) UNION ALL SELECT 'token_budgets', (SELECT COUNT(*) FROM token_budgets);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT 'agent_memory' as table_name, (SELECT COUNT(*) FROM agent_memory) as row_count UNION ALL SELECT 'failover_logs', (SELECT COUNT(*) FROM failover_logs) UNION ALL SELECT 'token_usage', (SELECT COUNT(*) FROM token_usage) UNION ALL SELECT 'token_budgets', (SELECT COUNT(*) FROM token_budgets);",
+  "rows": [
+    {
+      "table_name": "agent_memory",
+      "row_count": "2"
+    },
+    {
+      "table_name": "failover_logs",
+      "row_count": "0"
+    },
+    {
+      "table_name": "token_usage",
+      "row_count": "0"
+    },
+    {
+      "table_name": "token_budgets",
+      "row_count": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "table_name\trow_count\nagent_memory\t2\nfailover_logs\t0\ntoken_usage\t0\ntoken_budgets\t1\n",
+  "stderr": "",
+  "execution_time_ms": 64
+}

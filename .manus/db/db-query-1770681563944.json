@@ -1,0 +1,23 @@
+{
+  "query": "SELECT * FROM deployments WHERE status = 'success' ORDER BY id DESC LIMIT 1;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT * FROM deployments WHERE status = 'success' ORDER BY id DESC LIMIT 1;",
+  "rows": [
+    {
+      "id": "2",
+      "userId": "1",
+      "configurationId": "NULL",
+      "method": "railway",
+      "status": "success",
+      "instanceName": "my-sunclaw",
+      "externalId": "0babcde7-bac5-4845-9fca-e9fd6ed31915",
+      "externalUrl": "https://sunclaw-production-403d.up.railway.app",
+      "metadata": "{\"domain\": \"sunclaw-production-403d.up.railway.app\", \"railwayDeploymentId\": \"88733028-26bc-4372-a880-1ad7d9b0e866\", \"railwayEnvironmentId\": \"c7143e76-8124-4671-b2a1-e87cd19588ce\", \"railwayProjectId\": \"0babcde7-bac5-4845-9fca-e9fd6ed31915\", \"railwayServiceId\": \"5560cb5b-3745-490d-aec2-dc65cd672e60\"}",
+      "createdAt": "2026-02-09 22:04:45",
+      "updatedAt": "2026-02-09 22:04:55"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tconfigurationId\tmethod\tstatus\tinstanceName\texternalId\texternalUrl\tmetadata\tcreatedAt\tupdatedAt\n2\t1\tNULL\trailway\tsuccess\tmy-sunclaw\t0babcde7-bac5-4845-9fca-e9fd6ed31915\thttps://sunclaw-production-403d.up.railway.app\t{\"domain\": \"sunclaw-production-403d.up.railway.app\", \"railwayDeploymentId\": \"88733028-26bc-4372-a880-1ad7d9b0e866\", \"railwayEnvironmentId\": \"c7143e76-8124-4671-b2a1-e87cd19588ce\", \"railwayProjectId\": \"0babcde7-bac5-4845-9fca-e9fd6ed31915\", \"railwayServiceId\": \"5560cb5b-3745-490d-aec2-dc65cd672e60\"}\t2026-02-09 22:04:45\t2026-02-09 22:04:55\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}

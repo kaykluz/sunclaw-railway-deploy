@@ -1,0 +1,38 @@
+{
+  "query": "SELECT * FROM api_keys ORDER BY priority ASC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT * FROM api_keys ORDER BY priority ASC;",
+  "rows": [
+    {
+      "id": "6",
+      "userId": "1",
+      "provider": "minimax",
+      "label": "NULL",
+      "apiKey": "sk-cp-aBRim9SAnHnLjIRFoDc5IZ--U1zyDNs8gF-bU43Oq_mMYNbHnHyRCukZVUFRbd37Os5jOwOQoebvxqhBtrn_4SWWDHLvTcMxL6FygRBDz6sPm6rul2tgz9Y",
+      "priority": "0",
+      "keyStatus": "healthy",
+      "lastCheckedAt": "2026-02-10 08:45:37",
+      "lastError": "NULL",
+      "enabled": "1",
+      "createdAt": "2026-02-10 03:14:49",
+      "updatedAt": "2026-02-10 11:27:02"
+    },
+    {
+      "id": "7",
+      "userId": "1",
+      "provider": "kimi-coding",
+      "label": "NULL",
+      "apiKey": "sk-kimi-QtFJnorLUU1Q8V568uQVoa4gmY1Vlis3TpFxnvh3VchxyOwepN6Qdq8y6PbBbwzC",
+      "priority": "1",
+      "keyStatus": "healthy",
+      "lastCheckedAt": "2026-02-10 08:45:38",
+      "lastError": "NULL",
+      "enabled": "1",
+      "createdAt": "2026-02-10 03:15:08",
+      "updatedAt": "2026-02-10 11:27:00"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tprovider\tlabel\tapiKey\tpriority\tkeyStatus\tlastCheckedAt\tlastError\tenabled\tcreatedAt\tupdatedAt\n6\t1\tminimax\tNULL\tsk-cp-aBRim9SAnHnLjIRFoDc5IZ--U1zyDNs8gF-bU43Oq_mMYNbHnHyRCukZVUFRbd37Os5jOwOQoebvxqhBtrn_4SWWDHLvTcMxL6FygRBDz6sPm6rul2tgz9Y\t0\thealthy\t2026-02-10 08:45:37\tNULL\t1\t2026-02-10 03:14:49\t2026-02-10 11:27:02\n7\t1\tkimi-coding\tNULL\tsk-kimi-QtFJnorLUU1Q8V568uQVoa4gmY1Vlis3TpFxnvh3VchxyOwepN6Qdq8y6PbBbwzC\t1\thealthy\t2026-02-10 08:45:38\tNULL\t1\t2026-02-10 03:15:08\t2026-02-10 11:27:00\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

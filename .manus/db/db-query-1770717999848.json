@@ -1,0 +1,26 @@
+{
+  "query": "SELECT id, userId, status, externalId, externalUrl, metadata FROM deployments ORDER BY id DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT id, userId, status, externalId, externalUrl, metadata FROM deployments ORDER BY id DESC LIMIT 5;",
+  "rows": [
+    {
+      "id": "2",
+      "userId": "1",
+      "status": "deploying",
+      "externalId": "0babcde7-bac5-4845-9fca-e9fd6ed31915",
+      "externalUrl": "https://sunclaw-production-403d.up.railway.app",
+      "metadata": "{\"domain\": \"sunclaw-production-403d.up.railway.app\", \"gatewayToken\": \"b48f129b9c1c14664353ffa88deb6e49d159474efe4c6a266e8d24c15091eebf\", \"railwayDeploymentId\": \"9f88cc35-f03c-4ff5-96dd-65019deebe49\", \"railwayEnvironmentId\": \"c7143e76-8124-4671-b2a1-e87cd19588ce\", \"railwayProjectId\": \"0babcde7-bac5-4845-9fca-e9fd6ed31915\", \"railwayServiceId\": \"5560cb5b-3745-490d-aec2-dc65cd672e60\", \"redeployTriggeredAt\": 1770693697288}"
+    },
+    {
+      "id": "1",
+      "userId": "1",
+      "status": "success",
+      "externalId": "0f95b4f5-8476-45e7-992a-50732509b399",
+      "externalUrl": "https://sunclaw-production-403d.up.railway.app",
+      "metadata": "{\"domain\": \"sunclaw-production.up.railway.app\", \"railwayDeploymentId\": \"b9fb082c-73a2-4785-ab22-6120c8694cd5\", \"railwayEnvironmentId\": \"28626eec-b678-4c26-98fc-eabd1c9eb922\", \"railwayProjectId\": \"0f95b4f5-8476-45e7-992a-50732509b399\", \"railwayServiceId\": \"5075c404-1261-4f1e-a6aa-3d7160da0b34\"}"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tstatus\texternalId\texternalUrl\tmetadata\n2\t1\tdeploying\t0babcde7-bac5-4845-9fca-e9fd6ed31915\thttps://sunclaw-production-403d.up.railway.app\t{\"domain\": \"sunclaw-production-403d.up.railway.app\", \"gatewayToken\": \"b48f129b9c1c14664353ffa88deb6e49d159474efe4c6a266e8d24c15091eebf\", \"railwayDeploymentId\": \"9f88cc35-f03c-4ff5-96dd-65019deebe49\", \"railwayEnvironmentId\": \"c7143e76-8124-4671-b2a1-e87cd19588ce\", \"railwayProjectId\": \"0babcde7-bac5-4845-9fca-e9fd6ed31915\", \"railwayServiceId\": \"5560cb5b-3745-490d-aec2-dc65cd672e60\", \"redeployTriggeredAt\": 1770693697288}\n1\t1\tsuccess\t0f95b4f5-8476-45e7-992a-50732509b399\thttps://sunclaw-production-403d.up.railway.app\t{\"domain\": \"sunclaw-production.up.railway.app\", \"railwayDeploymentId\": \"b9fb082c-73a2-4785-ab22-6120c8694cd5\", \"railwayEnvironmentId\": \"28626eec-b678-4c26-98fc-eabd1c9eb922\", \"railwayProjectId\": \"0f95b4f5-8476-45e7-992a-50732509b399\", \"railwayServiceId\": \"5075c404-1261-4f1e-a6aa-3d7160da0b34\"}\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}

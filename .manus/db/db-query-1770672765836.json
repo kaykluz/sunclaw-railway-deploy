@@ -1,0 +1,17 @@
+{
+  "query": "SELECT id, openId, name, email, role FROM users ORDER BY createdAt ASC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT id, openId, name, email, role FROM users ORDER BY createdAt ASC LIMIT 5;",
+  "rows": [
+    {
+      "id": "1",
+      "openId": "aQb48Ag3TaDpNfwXRgUVgQ",
+      "name": "Solomon Ojoawo",
+      "email": "ojoawosolomon@gmail.com",
+      "role": "admin"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\trole\n1\taQb48Ag3TaDpNfwXRgUVgQ\tSolomon Ojoawo\tojoawosolomon@gmail.com\tadmin\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}

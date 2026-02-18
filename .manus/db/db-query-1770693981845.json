@@ -1,0 +1,22 @@
+{
+  "query": "SELECT id, instanceName, externalUrl, status FROM deployments ORDER BY id DESC LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT id, instanceName, externalUrl, status FROM deployments ORDER BY id DESC LIMIT 5;",
+  "rows": [
+    {
+      "id": "2",
+      "instanceName": "my-sunclaw",
+      "externalUrl": "https://sunclaw-production-403d.up.railway.app",
+      "status": "deploying"
+    },
+    {
+      "id": "1",
+      "instanceName": "my-sunclaw",
+      "externalUrl": "https://sunclaw-production.up.railway.app",
+      "status": "success"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tinstanceName\texternalUrl\tstatus\n2\tmy-sunclaw\thttps://sunclaw-production-403d.up.railway.app\tdeploying\n1\tmy-sunclaw\thttps://sunclaw-production.up.railway.app\tsuccess\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}

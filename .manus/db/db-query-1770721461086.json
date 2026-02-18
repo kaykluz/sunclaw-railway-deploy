@@ -1,0 +1,13 @@
+{
+  "query": "SELECT COUNT(*) as count FROM agent_memory;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT COUNT(*) as count FROM agent_memory;",
+  "rows": [
+    {
+      "count": "2"
+    }
+  ],
+  "messages": [],
+  "stdout": "count\n2\n",
+  "stderr": "",
+  "execution_time_ms": 138
+}

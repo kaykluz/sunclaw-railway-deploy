@@ -1,0 +1,8 @@
+{
+  "query": "UPDATE user SET role = 'admin' WHERE open_id = (SELECT open_id FROM user ORDER BY created_at ASC LIMIT 1);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute UPDATE user SET role = 'admin' WHERE open_id = (SELECT open_id FROM user ORDER BY created_at ASC LIMIT 1);",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1146 (42S02) at line 1: Table 'd2qvtgeta2frgrvdg8tgxk.user' doesn't exist"
+  ]
+}

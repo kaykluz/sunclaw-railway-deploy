@@ -1,0 +1,8 @@
+{
+  "query": "SELECT * FROM user_config WHERE config_key LIKE '%railway%' OR config_key LIKE '%gateway%' LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT * FROM user_config WHERE config_key LIKE '%railway%' OR config_key LIKE '%gateway%' LIMIT 20;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1146 (42S02) at line 1: Table 'd2qvtgeta2frgrvdg8tgxk.user_config' doesn't exist"
+  ]
+}

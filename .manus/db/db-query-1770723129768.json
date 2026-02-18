@@ -1,0 +1,28 @@
+{
+  "query": "SELECT id, userId, provider, label, enabled, priority, keyStatus FROM api_keys ORDER BY priority ASC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT id, userId, provider, label, enabled, priority, keyStatus FROM api_keys ORDER BY priority ASC;",
+  "rows": [
+    {
+      "id": "6",
+      "userId": "1",
+      "provider": "minimax",
+      "label": "NULL",
+      "enabled": "1",
+      "priority": "0",
+      "keyStatus": "healthy"
+    },
+    {
+      "id": "7",
+      "userId": "1",
+      "provider": "kimi-coding",
+      "label": "NULL",
+      "enabled": "1",
+      "priority": "1",
+      "keyStatus": "healthy"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tprovider\tlabel\tenabled\tpriority\tkeyStatus\n6\t1\tminimax\tNULL\t1\t0\thealthy\n7\t1\tkimi-coding\tNULL\t1\t1\thealthy\n",
+  "stderr": "",
+  "execution_time_ms": 50
+}

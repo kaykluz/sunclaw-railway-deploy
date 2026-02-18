@@ -1,0 +1,17 @@
+{
+  "query": "SELECT id, userId, JSON_TYPE(fullLog) as json_type, JSON_LENGTH(fullLog) as json_len, messageCount FROM agent_memory LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2Y9tmBp9czJ5zzF.941edf1afe57 --database d2QvTgeTa2FRgRvDg8tGXK --execute SELECT id, userId, JSON_TYPE(fullLog) as json_type, JSON_LENGTH(fullLog) as json_len, messageCount FROM agent_memory LIMIT 5;",
+  "rows": [
+    {
+      "id": "1",
+      "userId": "1",
+      "json_type": "STRING",
+      "json_len": "1",
+      "messageCount": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tuserId\tjson_type\tjson_len\tmessageCount\n1\t1\tSTRING\t1\t0\n",
+  "stderr": "",
+  "execution_time_ms": 59
+}
