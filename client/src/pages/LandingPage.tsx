@@ -1609,7 +1609,7 @@ export default function LandingPage() {
       setTimeout(() => {
         document.getElementById("talk")?.scrollIntoView({ behavior: "smooth" });
       }, 100);
-    } else if (hash === "#marketplace" || hash === "#deploy" || hash === "#features") {
+    } else if (hash === "#deploy" || hash === "#features") {
       setTimeout(() => {
         document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
       }, 100);
@@ -1656,7 +1656,7 @@ export default function LandingPage() {
         </a>
         <ul className="nav-links">
           <li><a href="#features">Features</a></li>
-          <li><a href="#marketplace">Marketplace</a></li>
+          <li><a href="/marketplace">Marketplace</a></li>
           <li><a href="/agent">For Developers</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="#talk" className="nav-cta" onClick={handleTalkClick}>Talk to SunClaw</a></li>
@@ -1764,50 +1764,29 @@ export default function LandingPage() {
         <div className="proof-item"><div className="proof-number">15+</div><div className="proof-label">Languages</div></div>
       </div>
 
-      {/* WHO IT'S FOR */}
-      <section className="audience-section" style={{ padding: "100px 40px 40px", maxWidth: 1280, margin: "0 auto" }}>
-        <div className="section-eyebrow">Who It's For</div>
-        <h2 className="section-heading">Two sides. One conversation.</h2>
-        <p className="section-sub">SunClaw is a two-sided marketplace. Both sides build profiles through conversation, and both sides get matched.</p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 40 }}>
-          <div style={{ padding: 36, borderRadius: 20, background: "rgba(245,166,35,0.05)", border: "1px solid rgba(245,166,35,0.15)" }}>
-            <div style={{ fontSize: 28, marginBottom: 16 }}>☀️</div>
-            <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, fontWeight: 700, marginBottom: 8, color: "#F5A623" }}>Looking for services</h3>
-            <p style={{ fontSize: 14, color: "#9E958B", lineHeight: 1.7, marginBottom: 16 }}>Project developers, asset owners, C&I clients, utilities, governments, and anyone building or financing a renewable energy project.</p>
-            <p style={{ fontSize: 13, color: "#6B635B", lineHeight: 1.7, fontStyle: "italic" }}>"Find me an EPC in Lagos." "Model this PPA." "Who's financing mini-grids right now?"</p>
-          </div>
-          <div style={{ padding: 36, borderRadius: 20, background: "rgba(232,102,74,0.05)", border: "1px solid rgba(232,102,74,0.15)" }}>
-            <div style={{ fontSize: 28, marginBottom: 16 }}>🔧</div>
-            <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 20, fontWeight: 700, marginBottom: 8, color: "#E8664A" }}>Offering services</h3>
-            <p style={{ fontSize: 14, color: "#9E958B", lineHeight: 1.7, marginBottom: 16 }}>Installers, EPC contractors, financiers, DFIs, consultants, equipment suppliers, recruiters, and independent engineers.</p>
-            <p style={{ fontSize: 13, color: "#6B635B", lineHeight: 1.7, fontStyle: "italic" }}>"Send me solar leads in West Africa." "Match me with projects that need biomass expertise." "I have surplus panels to move."</p>
-          </div>
-        </div>
-      </section>
-
       {/* HOW IT WORKS */}
       <section className="how-section">
         <div className="section-eyebrow">How It Works</div>
         <h2 className="section-heading">Three steps. No forms. No dashboards.</h2>
-        <p className="section-sub">SunClaw builds your profile through natural conversation, then connects you to exactly what you need.</p>
+        <p className="section-sub">Message SunClaw. Tell it what you need. Get expert-level answers for renewable energy — instantly.</p>
         <div className="steps-grid">
           <div className="step-card">
             <div className="step-number">01</div>
             <div className="step-icon">💬</div>
-            <h3>Start a Conversation</h3>
-            <p>Message SunClaw on Telegram, WhatsApp, Signal, Discord, Slack, Teams, Google Chat, iMessage, Matrix, or WebChat. Tell it what you're building or what you offer. No sign-up forms. Just talk.</p>
+            <h3>Message SunClaw</h3>
+            <p>Open Telegram and send a message. No sign-up. No account. Just tell SunClaw what you're working on.</p>
           </div>
           <div className="step-card">
             <div className="step-number">02</div>
             <div className="step-icon">🧠</div>
-            <h3>SunClaw Learns</h3>
-            <p>Every conversation builds a structured profile. Whether you're a developer describing a project or an installer listing your capabilities, SunClaw captures it naturally as you talk.</p>
+            <h3>Get Expert Answers</h3>
+            <p>Financial modeling, project planning, field diagnostics, document generation — SunClaw handles the full lifecycle of renewable energy projects through conversation.</p>
           </div>
           <div className="step-card">
             <div className="step-number">03</div>
             <div className="step-icon">🤝</div>
-            <h3>Both Sides Get Matched</h3>
-            <p>SunClaw anonymously matches supply to demand. Developers find installers. Installers find leads. Financiers find deal flow. Both parties consent before any introduction is made.</p>
+            <h3>Build and Connect</h3>
+            <p>As you talk, SunClaw builds your profile. When the marketplace launches, you'll be first in line for matching with the right people.</p>
           </div>
         </div>
       </section>
@@ -1866,34 +1845,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* MARKETPLACE */}
-      <section className="marketplace-section" id="marketplace">
-        <div className="marketplace-inner">
-          <div className="section-eyebrow">The Marketplace</div>
-          <h2 className="section-heading">Every conversation powers something.</h2>
-          <p className="section-sub">SunClaw is a multi-sided marketplace where every chat builds a profile, and every profile becomes a node in a matching network.</p>
-          <div className="market-cards">
-            {[
-              { icon: "💰", title: "Project-to-Finance", desc: "Developers find capital. Investors find deal flow. Anonymous matching, consent-based introductions." },
-              { icon: "🔨", title: "Developer-to-Installer", desc: "Developers find verified installers. Installers receive qualified leads by region and specialization." },
-              { icon: "👷", title: "Developer-to-EPC", desc: "Projects find contractors. EPCs, engineers, and consultants find new mandates." },
-              { icon: "🌱", title: "Carbon Credits", desc: "Project owners assess eligibility and estimate volumes. Buyers find verified carbon credit supply." },
-              { icon: "👥", title: "Talent Matching", desc: "Job seekers build profiles through conversation. Employers search by skills, not keywords." },
-              { icon: "⚡", title: "Equipment Market", desc: "Buyers find panels, inverters, and batteries. Distributors and OEMs reach verified demand." },
-              { icon: "🏗️", title: "Startup-to-Funder", desc: "RE startups find VCs, grants, and accelerators. Funders find vetted early-stage pipeline." },
-              { icon: "🗺️", title: "Land-to-Developer", desc: "Landowners list suitable parcels. Developers find sites for utility-scale and mini-grid projects." },
-              { icon: "🛡️", title: "Insurance Marketplace", desc: "Projects find brokers and underwriters. Insurers access a pipeline of RE risk they can price." },
-            ].map((m, i) => (
-              <div className="market-card" key={i}>
-                <div className="market-icon">{m.icon}</div>
-                <h4>{m.title}</h4>
-                <p>{m.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* DEPLOY YOUR OWN */}
       <section id="deploy" style={{ padding: "100px 40px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
@@ -1937,7 +1888,7 @@ export default function LandingPage() {
         <div className="cta-content">
           <CtaLogo />
           <h2>Clean energy starts<br/>with a <span style={{ color: "var(--sun-gold)" }}>message</span>.</h2>
-          <p>Whether you're building projects or providing the services to build them, join the waitlist for the conversational operating system for renewable energy.</p>
+          <p>Whether you're planning a solar farm or diagnosing a fault in the field, SunClaw is your AI advisor for renewable energy.</p>
           <a href="#talk" className="btn-primary" style={{ display: "inline-block" }} onClick={handleTalkClick}>Start the conversation</a>
         </div>
       </section>
