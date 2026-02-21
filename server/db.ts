@@ -118,17 +118,42 @@ export async function addToWaitlist(
     await db.insert(waitlist).values(entry);
     return { success: true, alreadyExists: false, telegramDeepLink: entry.telegramDeepLink };
   } catch (error: any) {
-    // MySQL duplicate key error code - fetch existing record's deep link
+    // MySQL duplicate key error code - UPDATE existing record
     if (error?.code === "ER_DUP_ENTRY" || error?.errno === 1062) {
+      // Update their details (name, phone, intent, region, company)
+      await db.update(waitlist)
+        .set({
+          name: entry.name,
+          phone: entry.phone,
+          intent: entry.intent,
+          region: entry.region,
+          company: entry.company,
+          role: entry.role,
+          source: entry.source,
+        })
+        .where(eq(waitlist.email, entry.email!));
+
+      // Get their existing telegramDeepLink
       const existing = await db
         .select({ telegramDeepLink: waitlist.telegramDeepLink })
         .from(waitlist)
-        .where(eq(waitlist.email, entry.email))
+        .where(eq(waitlist.email, entry.email!))
         .limit(1);
+
+      let finalLink = existing[0]?.telegramDeepLink;
+
+      // If they didn't have a deep link before, set one now
+      if (!finalLink) {
+        finalLink = entry.telegramDeepLink;
+        await db.update(waitlist)
+          .set({ telegramDeepLink: entry.telegramDeepLink })
+          .where(eq(waitlist.email, entry.email!));
+      }
+
       return {
         success: true,
         alreadyExists: true,
-        telegramDeepLink: existing[0]?.telegramDeepLink ?? entry.telegramDeepLink,
+        telegramDeepLink: finalLink ?? entry.telegramDeepLink,
       };
     }
     console.error("[Database] Failed to add to waitlist:", error);

@@ -1010,6 +1010,11 @@ const landingCSS = `
   transform: translateX(4px);
 }
 
+.sc-landing .sc-funnel-tg-brand {
+  color: #229ED9;
+  font-weight: 700;
+}
+
 .sc-landing .sc-funnel-cta-row {
   margin-left: 36px;
   animation: scFunnelFadeUp 0.3s ease forwards;
@@ -1536,6 +1541,20 @@ const landingCSS = `
 
 [data-theme="light"] .sc-landing .cta-section p {
   color: #5A534B;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-telegram-cta {
+  background: linear-gradient(135deg, #D48C1A, #E5A020);
+  box-shadow: 0 4px 20px rgba(212,140,26,0.25);
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-telegram-cta:hover {
+  box-shadow: 0 8px 32px rgba(212,140,26,0.35);
+}
+
+/* Telegram brand color stays consistent */
+[data-theme="light"] .sc-landing .sc-funnel-tg-brand {
+  color: #1E8CC3;
 }
 
 /* Footer stays dark in both modes */
