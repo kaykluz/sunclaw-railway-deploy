@@ -100,7 +100,11 @@ const TypingIndicator = () => (
   </div>
 );
 
-export default function ConversationalFunnel() {
+interface ConversationalFunnelProps {
+  onBack?: () => void;
+}
+
+export default function ConversationalFunnel({ onBack }: ConversationalFunnelProps) {
   const [step, setStep] = useState<Step>("role");
   const [role, setRole] = useState<Role>(null);
   const [region, setRegion] = useState<string | null>(null);
@@ -302,11 +306,18 @@ export default function ConversationalFunnel() {
 
   return (
     <div className="sc-funnel">
+      {/* Back button */}
+      {onBack && (
+        <button type="button" className="sc-funnel-back" onClick={onBack}>
+          <span>←</span> Back
+        </button>
+      )}
+
       {/* Step 1: Role Selection */}
       <BotMessage animate={false}>What can I help you with?</BotMessage>
 
       {step === "role" && (
-        <div className={`sc-funnel-choices ${stepEntering ? "sc-funnel-step-enter" : ""}`}>
+        <div className={`sc-funnel-choices-grid ${stepEntering ? "sc-funnel-step-enter" : ""}`}>
           {ROLE_OPTIONS.map((opt, i) => (
             <ChoiceCard
               key={opt.id}
@@ -315,7 +326,7 @@ export default function ConversationalFunnel() {
               label={opt.label}
               descriptor={opt.descriptor}
               onClick={() => handleRoleSelect(opt.id as Role)}
-              delay={i * 40}
+              delay={100 + i * 80}
             />
           ))}
         </div>

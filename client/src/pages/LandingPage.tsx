@@ -390,6 +390,11 @@ const landingCSS = `
   min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
   padding: 120px 40px 80px; position: relative; overflow: hidden;
 }
+.sc-landing .hero.funnel-active {
+  min-height: auto;
+  justify-content: flex-start;
+  padding-bottom: 64px;
+}
 .sc-landing .hero::before {
   content: ''; position: absolute; top: -200px; right: -200px; width: 900px; height: 900px;
   background: radial-gradient(circle, rgba(245,166,35,0.1) 0%, rgba(232,102,74,0.04) 40%, transparent 70%);
@@ -685,6 +690,8 @@ const landingCSS = `
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  opacity: 0;
+  animation: scFunnelFadeUp 0.35s ease forwards;
 }
 
 .sc-landing .sc-funnel-bot-avatar {
@@ -768,32 +775,51 @@ const landingCSS = `
   animation: scFunnelFadeUp 0.3s ease forwards;
 }
 
-.sc-landing .sc-funnel-choices {
+.sc-landing .sc-funnel-choices,
+.sc-landing .sc-funnel-choices-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
   margin-left: 36px;
 }
 
 .sc-landing .sc-funnel-choice {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 14px;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  border-radius: 16px;
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   text-align: left;
   opacity: 0;
-  animation: scFunnelFadeUp 0.3s ease forwards;
+  animation: scFunnelFadeUp 0.35s ease forwards;
 }
 
+/* Staggered entrance animation */
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(1) { animation-delay: 100ms; }
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(2) { animation-delay: 180ms; }
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(3) { animation-delay: 260ms; }
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(4) { animation-delay: 340ms; }
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(5) { animation-delay: 420ms; }
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(6) { animation-delay: 500ms; }
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(7) { animation-delay: 580ms; }
+.sc-landing .sc-funnel-choices-grid .sc-funnel-choice:nth-child(8) { animation-delay: 660ms; }
+
 .sc-landing .sc-funnel-choice:hover {
-  border-color: rgba(245,166,35,0.2);
-  background: rgba(255,255,255,0.04);
-  transform: translateY(-2px);
+  border-color: rgba(245,166,35,0.3);
+  background: rgba(245,166,35,0.04);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15),
+              0 0 0 1px rgba(245,166,35,0.08),
+              inset 0 1px 0 rgba(245,166,35,0.06);
+}
+
+.sc-landing .sc-funnel-choice:active {
+  transform: translateY(-1px) scale(0.98);
+  transition: all 0.1s;
 }
 
 .sc-landing .sc-funnel-choice.selected {
@@ -803,9 +829,20 @@ const landingCSS = `
 }
 
 .sc-landing .sc-funnel-choice-icon {
-  font-size: 20px;
+  font-size: 22px;
   flex-shrink: 0;
-  margin-top: 2px;
+  transition: transform 0.3s ease;
+}
+
+.sc-landing .sc-funnel-choice:hover .sc-funnel-choice-icon {
+  animation: scChoiceIconBounce 0.4s ease;
+}
+
+@keyframes scChoiceIconBounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1.05); }
 }
 
 .sc-landing .sc-funnel-choice-label {
@@ -1002,7 +1039,8 @@ const landingCSS = `
 
 @media (max-width: 768px) {
   .sc-landing .sc-funnel { max-width: 100%; }
-  .sc-landing .sc-funnel-choices { margin-left: 0; grid-template-columns: 1fr; }
+  .sc-landing .sc-funnel-choices,
+  .sc-landing .sc-funnel-choices-grid { margin-left: 0; grid-template-columns: 1fr; }
   .sc-landing .sc-funnel-regions { margin-left: 0; grid-template-columns: 1fr; }
   .sc-landing .sc-funnel-form { margin-left: 0; max-width: 100%; }
   .sc-landing .sc-funnel-cta-row { margin-left: 0; }
@@ -1190,34 +1228,27 @@ const landingCSS = `
   right: 0;
 }
 
-/* Back button */
-.sc-landing .funnel-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
+/* Funnel back button (inside funnel) */
+.sc-landing .sc-funnel-back {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 100px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   cursor: pointer;
-  transition: all 0.3s;
+  padding: 8px 16px;
   margin-bottom: 24px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.sc-landing .funnel-back-btn:hover {
-  border-color: rgba(245,166,35,0.3);
-  color: var(--sun-gold);
-}
-
-.sc-landing .funnel-back-btn:hover .funnel-back-arrow {
-  transform: translateX(-3px);
-}
-
-.sc-landing .funnel-back-arrow {
-  transition: transform 0.3s;
+.sc-landing .sc-funnel-back:hover {
+  color: var(--text-secondary);
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
 }
 
 @media (max-width: 768px) {
@@ -1232,10 +1263,314 @@ const landingCSS = `
     min-height: auto;
   }
 }
+
+/* THEME TOGGLE */
+.sc-landing .theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  margin-left: 12px;
+}
+
+.sc-landing .theme-toggle:hover {
+  border-color: rgba(245,166,35,0.3);
+  background: rgba(245,166,35,0.06);
+  transform: rotate(15deg);
+}
+
+/* LIGHT MODE OVERRIDES */
+[data-theme="light"] .sc-landing {
+  --bg-primary: #FFF8F0;
+  --text-primary: #1A1612;
+  --text-secondary: #5A534B;
+  --text-muted: #8B8279;
+  --sun-gold: #D48C1A;
+  --lobster-coral: #D15A3E;
+  background: #FFF8F0;
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .sc-nav {
+  background: rgba(255,248,240,0.85);
+  border-bottom-color: rgba(26,22,18,0.06);
+}
+
+[data-theme="light"] .sc-landing .nav-links a {
+  color: #5A534B;
+}
+
+[data-theme="light"] .sc-landing .nav-links a:hover {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .nav-cta {
+  background: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .theme-toggle {
+  border-color: rgba(26,22,18,0.1);
+  background: rgba(26,22,18,0.04);
+}
+
+[data-theme="light"] .sc-landing .theme-toggle:hover {
+  border-color: rgba(26,22,18,0.2);
+  background: rgba(26,22,18,0.08);
+}
+
+[data-theme="light"] .sc-landing .hero h1 {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .hero h1 .gold {
+  color: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .hero h1 .coral {
+  color: #D15A3E;
+}
+
+[data-theme="light"] .sc-landing .hero-sub {
+  color: #5A534B;
+}
+
+[data-theme="light"] .sc-landing .hero-badge {
+  background: rgba(212,140,26,0.1);
+  border-color: rgba(212,140,26,0.2);
+  color: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .hero-product-card {
+  background: #FFFFFF;
+  border-color: rgba(26,22,18,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .sc-landing .hero-card-talk {
+  background: rgba(245,166,35,0.05);
+  border-color: rgba(245,166,35,0.15);
+}
+
+[data-theme="light"] .sc-landing .hero-card-deploy {
+  background: rgba(232,102,74,0.05);
+  border-color: rgba(232,102,74,0.15);
+}
+
+[data-theme="light"] .sc-landing .hero-product-card:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+}
+
+[data-theme="light"] .sc-landing .hero-card-title {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .hero-card-talk .hero-card-title {
+  color: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .hero-card-deploy .hero-card-title {
+  color: #D15A3E;
+}
+
+[data-theme="light"] .sc-landing .hero-card-desc {
+  color: #5A534B;
+}
+
+[data-theme="light"] .sc-landing .hero-card-audiences,
+[data-theme="light"] .sc-landing .hero-card-tiers {
+  color: #8B8279;
+}
+
+[data-theme="light"] .sc-landing .hero-card-cta {
+  color: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .hero-card-cta-deploy {
+  color: #D15A3E;
+}
+
+[data-theme="light"] .sc-landing .social-proof {
+  border-color: rgba(26,22,18,0.06);
+}
+
+[data-theme="light"] .sc-landing .proof-number {
+  color: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .proof-label {
+  color: #8B8279;
+}
+
+[data-theme="light"] .sc-landing .section-eyebrow {
+  color: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .section-heading {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .section-sub {
+  color: #5A534B;
+}
+
+[data-theme="light"] .sc-landing .step-card,
+[data-theme="light"] .sc-landing .feature-card,
+[data-theme="light"] .sc-landing .market-card {
+  background: #FFFFFF;
+  border-color: rgba(26,22,18,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .sc-landing .step-card:hover,
+[data-theme="light"] .sc-landing .feature-card:hover,
+[data-theme="light"] .sc-landing .market-card:hover {
+  border-color: rgba(212,140,26,0.2);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .sc-landing .step-card h3,
+[data-theme="light"] .sc-landing .feature-card h3,
+[data-theme="light"] .sc-landing .market-card h4 {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .step-card p,
+[data-theme="light"] .sc-landing .feature-card p,
+[data-theme="light"] .sc-landing .market-card p {
+  color: #5A534B;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-bot-bubble {
+  background: rgba(26,22,18,0.04);
+  color: #5A534B;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-user-bubble {
+  background: rgba(245,166,35,0.12);
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-choice {
+  background: #FFFFFF;
+  border-color: rgba(26,22,18,0.08);
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-choice:hover {
+  background: rgba(245,166,35,0.04);
+  border-color: rgba(212,140,26,0.3);
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-choice-label {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-choice-desc {
+  color: #8B8279;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-input {
+  background: #FFFFFF;
+  border-color: rgba(26,22,18,0.12);
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-input::placeholder {
+  color: #8B8279;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-input:focus {
+  border-color: rgba(212,140,26,0.5);
+  box-shadow: 0 0 0 3px rgba(212,140,26,0.1);
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-submit {
+  background: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-submit:hover {
+  background: #C07F17;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-back {
+  border-color: rgba(26,22,18,0.08);
+  color: #8B8279;
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-back:hover {
+  border-color: rgba(26,22,18,0.15);
+  color: #5A534B;
+  background: rgba(26,22,18,0.03);
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-region {
+  background: #FFFFFF;
+  border-color: rgba(26,22,18,0.08);
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-region:hover {
+  background: rgba(245,166,35,0.04);
+  border-color: rgba(212,140,26,0.3);
+}
+
+[data-theme="light"] .sc-landing .sc-funnel-region-label {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .btn-primary {
+  background: #D48C1A;
+}
+
+[data-theme="light"] .sc-landing .btn-primary:hover {
+  background: #C07F17;
+}
+
+[data-theme="light"] .sc-landing .cta-section h2 {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-landing .cta-section p {
+  color: #5A534B;
+}
+
+/* Footer stays dark in both modes */
+[data-theme="light"] .sc-landing .sc-footer {
+  background: #1A1612;
+}
+
+/* Smooth theme transition */
+.sc-landing,
+.sc-landing .sc-nav,
+.sc-landing .hero,
+.sc-landing .hero-product-card,
+.sc-landing .feature-card,
+.sc-landing .step-card,
+.sc-landing .market-card,
+.sc-landing .sc-funnel-choice,
+.sc-landing .sc-funnel-input,
+.sc-landing .sc-funnel-bot-bubble {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
 `;
 
 export default function LandingPage() {
   const [heroState, setHeroState] = useState<HeroState>('cards');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('sc-theme') as 'dark' | 'light') || 'dark';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('sc-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     // Inject scoped CSS
@@ -1306,17 +1641,42 @@ export default function LandingPage() {
           <li><a href="/agent">For Developers</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="#talk" className="nav-cta" onClick={handleTalkClick}>Talk to SunClaw</a></li>
+          <li>
+            <button
+              className="theme-toggle"
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label="Toggle light mode"
+            >
+              {theme === 'dark' ? (
+                <svg viewBox="0 0 20 20" width="18" height="18" fill="none">
+                  <circle cx="10" cy="10" r="4" fill="#F5A623"/>
+                  <line x1="10" y1="2" x2="10" y2="4" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="10" y1="16" x2="10" y2="18" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="2" y1="10" x2="4" y2="10" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="16" y1="10" x2="18" y2="10" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="4.2" y1="4.2" x2="5.6" y2="5.6" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="14.4" y1="14.4" x2="15.8" y2="15.8" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="4.2" y1="15.8" x2="5.6" y2="14.4" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="14.4" y1="5.6" x2="15.8" y2="4.2" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+              ) : (
+                <svg viewBox="0 0 20 20" width="18" height="18" fill="none">
+                  <path d="M17 11.5A7.5 7.5 0 018.5 3c0-.8.1-1.6.4-2.3A8 8 0 1017 11.5z" fill="#1A1612" stroke="#1A1612" strokeWidth="1"/>
+                </svg>
+              )}
+            </button>
+          </li>
         </ul>
       </nav>
 
       {/* HERO */}
-      <section className="hero">
+      <section className={`hero ${heroState === 'funnel' ? 'funnel-active' : ''}`}>
         <div className="hero-badge">🦞 Born in the reef. Built for the sun.</div>
         <div className="hero-logo"><HeroLogo /></div>
         <h1>The <span className="gold">energy conversation</span> the world's been waiting for.</h1>
         <p className="hero-sub">SunClaw is your AI-powered advisor for renewable energy. Whether you're developing a project or providing the services to build one, SunClaw matches you to the right people through conversation.</p>
 
-        <div id="talk" className="hero-section-wrapper">
+        <div id="talk" className="hero-section-wrapper" style={{ marginTop: heroState === 'funnel' ? '32px' : '0' }}>
           {/* Two-card hero view */}
           <div className={`hero-cards-container ${heroState === 'funnel' ? 'hidden' : ''}`}>
             <div className="hero-cards">
@@ -1369,15 +1729,7 @@ export default function LandingPage() {
 
           {/* Funnel view */}
           <div className={`hero-funnel-container ${heroState === 'cards' ? 'hidden' : ''}`}>
-            <button
-              type="button"
-              className="funnel-back-btn"
-              onClick={handleBackToCards}
-            >
-              <span className="funnel-back-arrow">←</span>
-              Back to options
-            </button>
-            <ConversationalFunnel />
+            <ConversationalFunnel onBack={handleBackToCards} />
           </div>
         </div>
       </section>
