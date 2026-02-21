@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // SunClaw mini icon for nav
 const SunClawIcon = ({ size = 32 }: { size?: number }) => (
@@ -40,10 +40,34 @@ const FooterLogo = () => (
   </svg>
 );
 
-// Marketplace verticals data
+// SunClaw mascot with badge for vertical icons
+const VerticalIcon = ({ badge }: { badge: string }) => (
+  <div className="mp-vertical-icon">
+    <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="18" fill="url(#scGradV)" />
+      <ellipse cx="14" cy="17" rx="3" ry="4" fill="#1A1612" />
+      <ellipse cx="26" cy="17" rx="3" ry="4" fill="#1A1612" />
+      <ellipse cx="14.5" cy="16.5" rx="1" ry="1.5" fill="#FFF" />
+      <ellipse cx="26.5" cy="16.5" rx="1" ry="1.5" fill="#FFF" />
+      <path d="M12 26c1.5 3 4 4.5 8 4.5s6.5-1.5 8-4.5" stroke="#1A1612" strokeWidth="2" strokeLinecap="round" />
+      <path d="M8 10c-3-4-2-7 1-8" stroke="#E8664A" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M32 10c3-4 2-7-1-8" stroke="#E8664A" strokeWidth="2.5" strokeLinecap="round" />
+      <defs>
+        <linearGradient id="scGradV" x1="4" y1="4" x2="36" y2="36">
+          <stop stopColor="#F5A623" />
+          <stop offset="1" stopColor="#E8664A" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <span className="mp-vertical-badge">{badge}</span>
+  </div>
+);
+
+// Marketplace verticals data with keys
 const VERTICALS = [
   {
-    icon: "💰",
+    key: "project-finance",
+    badge: "💰",
     title: "Project-to-Finance",
     desc: "Developers find capital. Investors find deal flow. Anonymous matching with consent-based introductions.",
     supply: "DFIs, VCs, PE funds, impact investors, commercial banks, green bond issuers",
@@ -51,7 +75,8 @@ const VERTICALS = [
     example: "I have a 12MW solar project in Kenya at PPA stage. Who's financing?"
   },
   {
-    icon: "🔨",
+    key: "dev-installer",
+    badge: "🔨",
     title: "Developer-to-Installer",
     desc: "Developers find verified installers. Installers receive qualified leads by region and specialization.",
     supply: "Solar installers, electrical contractors, rooftop specialists",
@@ -59,7 +84,8 @@ const VERTICALS = [
     example: "Find me a certified installer for a 200kW rooftop in Accra."
   },
   {
-    icon: "👷",
+    key: "dev-epc",
+    badge: "👷",
     title: "Developer-to-EPC",
     desc: "Projects find full-service contractors. EPCs, engineers, and consultants find new mandates.",
     supply: "EPC contractors, civil engineers, structural consultants, grid specialists",
@@ -67,7 +93,8 @@ const VERTICALS = [
     example: "I need an EPC with West African experience for a 50MW ground-mount."
   },
   {
-    icon: "🌱",
+    key: "carbon",
+    badge: "🌱",
     title: "Carbon Credits",
     desc: "Project owners assess eligibility and estimate volumes. Buyers find verified carbon credit supply.",
     supply: "Carbon-eligible project owners, verification bodies",
@@ -75,7 +102,8 @@ const VERTICALS = [
     example: "Estimate the carbon credit yield for my 8MW biomass plant."
   },
   {
-    icon: "👥",
+    key: "talent",
+    badge: "👥",
     title: "Talent Matching",
     desc: "Job seekers build profiles through conversation. Employers search by skills, not keywords.",
     supply: "Engineers, technicians, project managers, sales professionals, analysts",
@@ -83,7 +111,8 @@ const VERTICALS = [
     example: "I'm a solar PV engineer with 5 years in East Africa. What's available?"
   },
   {
-    icon: "⚡",
+    key: "equipment",
+    badge: "⚡",
     title: "Equipment Market",
     desc: "Buyers find panels, inverters, batteries, and balance-of-system. Distributors and OEMs reach verified demand.",
     supply: "Panel manufacturers, inverter OEMs, battery distributors, BoS suppliers",
@@ -91,7 +120,8 @@ const VERTICALS = [
     example: "I need 500 Tier-1 monocrystalline panels delivered to Lagos."
   },
   {
-    icon: "🏗️",
+    key: "startup-funder",
+    badge: "🏗️",
     title: "Startup-to-Funder",
     desc: "RE startups find VCs, grants, and accelerators. Funders find vetted early-stage pipeline.",
     supply: "VCs, angel investors, grant programs, accelerators, impact funds",
@@ -99,7 +129,8 @@ const VERTICALS = [
     example: "We're a pre-seed mini-grid SaaS. Who funds this space?"
   },
   {
-    icon: "🗺️",
+    key: "land-dev",
+    badge: "🗺️",
     title: "Land-to-Developer",
     desc: "Landowners list suitable parcels. Developers find sites for utility-scale and mini-grid projects.",
     supply: "Landowners, government land agencies, lease brokers",
@@ -107,13 +138,20 @@ const VERTICALS = [
     example: "I have 50 hectares in northern Nigeria. Is it suitable for solar?"
   },
   {
-    icon: "🛡️",
+    key: "insurance",
+    badge: "🛡️",
     title: "Insurance Marketplace",
     desc: "Projects find brokers and underwriters. Insurers access a pipeline of RE risk they can price.",
     supply: "Insurance brokers, underwriters, risk assessors",
     demand: "Project developers, asset owners, O&M providers, lenders",
     example: "I need construction all-risk insurance for a 20MW project."
   }
+];
+
+const SIDE_OPTIONS = [
+  { value: "seeking", label: "I'm looking for services" },
+  { value: "offering", label: "I'm offering services" },
+  { value: "both", label: "Both" },
 ];
 
 // CSS for the marketplace page
@@ -236,24 +274,108 @@ const marketplaceCSS = `
   margin: 0 auto 32px;
 }
 
-.sc-marketplace .coming-soon-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  border-radius: 100px;
-  background: rgba(245,166,35,0.06);
-  border: 1px solid rgba(245,166,35,0.15);
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  color: var(--sun-gold);
-  letter-spacing: 1px;
-  animation: scComingSoonPulse 3s ease-in-out infinite;
+/* WAITLIST FORM */
+.sc-marketplace .mp-waitlist-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-@keyframes scComingSoonPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245,166,35,0); }
-  50% { box-shadow: 0 0 0 6px rgba(245,166,35,0.08); }
+.sc-marketplace .mp-waitlist-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.sc-marketplace .mp-waitlist-input::placeholder {
+  color: var(--text-muted);
+}
+
+.sc-marketplace .mp-waitlist-input:focus {
+  border-color: var(--sun-gold);
+  background: rgba(255,255,255,0.06);
+}
+
+.sc-marketplace .mp-waitlist-select {
+  padding: 14px 20px;
+  padding-right: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C4BAA8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  transition: all 0.3s;
+}
+
+.sc-marketplace .mp-waitlist-select:focus {
+  border-color: var(--sun-gold);
+  background-color: rgba(255,255,255,0.06);
+}
+
+.sc-marketplace .mp-waitlist-select option {
+  background: #1A1612;
+  color: var(--text-primary);
+}
+
+.sc-marketplace .mp-waitlist-submit {
+  padding: 14px 28px;
+  border-radius: 12px;
+  border: none;
+  background: var(--sun-gold);
+  color: #1A1612;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.sc-marketplace .mp-waitlist-submit:hover:not(:disabled) {
+  background: #FFB840;
+  transform: translateY(-2px);
+}
+
+.sc-marketplace .mp-waitlist-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.sc-marketplace .mp-waitlist-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 12px;
+  background: rgba(76, 175, 80, 0.12);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  color: #81C784;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  animation: mpFadeIn 0.3s ease;
+}
+
+@keyframes mpFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* SECTIONS */
@@ -435,23 +557,92 @@ const marketplaceCSS = `
   text-align: left;
 }
 
+/* VERTICAL CARD — Redesigned */
 .sc-marketplace .vertical-card {
   padding: 32px;
   border-radius: 20px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.sc-marketplace .vertical-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sc-marketplace .vertical-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(245,166,35,0.03) 0%, rgba(232,102,74,0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .sc-marketplace .vertical-card:hover {
-  border-color: rgba(245,166,35,0.2);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+  border-color: rgba(245,166,35,0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.2);
 }
 
-.sc-marketplace .vertical-card-icon {
-  font-size: 28px;
+.sc-marketplace .vertical-card:hover::before {
+  opacity: 1;
+}
+
+/* Vertical Icon + Badge */
+.sc-marketplace .mp-vertical-icon {
+  position: relative;
+  display: inline-block;
   margin-bottom: 16px;
+}
+
+.sc-marketplace .mp-vertical-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -8px;
+  font-size: 16px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 2px 6px;
+  backdrop-filter: blur(4px);
+}
+
+/* Coming Soon Status */
+.sc-marketplace .mp-vertical-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(245,166,35,0.08);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--sun-gold);
+  margin-bottom: 12px;
+}
+
+.sc-marketplace .mp-vertical-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sun-gold);
+  animation: mpPulseDot 2s ease-in-out infinite;
+}
+
+@keyframes mpPulseDot {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 
 .sc-marketplace .vertical-card h3 {
@@ -516,7 +707,7 @@ const marketplaceCSS = `
 .sc-marketplace .cta-section {
   text-align: center;
   padding: 100px 24px;
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -535,31 +726,9 @@ const marketplaceCSS = `
   line-height: 1.7;
 }
 
-.sc-marketplace .cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 36px;
-  border-radius: 100px;
-  background: var(--sun-gold);
-  color: #1A1612;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  text-decoration: none;
-  transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(245,166,35,0.25);
-}
-
-.sc-marketplace .cta-btn:hover {
-  background: #FFB840;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(245,166,35,0.35);
-}
-
 .sc-marketplace .cta-alt {
   display: block;
-  margin-top: 16px;
+  margin-top: 20px;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   color: var(--text-muted);
@@ -674,6 +843,16 @@ const marketplaceCSS = `
     margin-left: 0;
     margin-top: 8px;
   }
+
+  .sc-marketplace .mp-waitlist-form {
+    flex-direction: column;
+  }
+
+  .sc-marketplace .mp-waitlist-input,
+  .sc-marketplace .mp-waitlist-select,
+  .sc-marketplace .mp-waitlist-submit {
+    width: 100%;
+  }
 }
 
 /* LIGHT MODE — Brand-compliant Soft Cream palette */
@@ -771,20 +950,57 @@ const marketplaceCSS = `
   color: #4A4540;
 }
 
-/* Coming Soon badge */
-[data-theme="light"] .sc-marketplace .coming-soon-badge {
-  background: rgba(245,166,35,0.08);
-  border-color: rgba(245,166,35,0.15);
-  color: #B8891E;
+/* Waitlist form light mode */
+[data-theme="light"] .sc-marketplace .mp-waitlist-input,
+[data-theme="light"] .sc-marketplace .mp-waitlist-select {
+  background: rgba(26,22,18,0.03);
+  border-color: rgba(26,22,18,0.1);
+  color: #1A1612;
 }
 
-/* CTA button */
-[data-theme="light"] .sc-marketplace .cta-btn {
+[data-theme="light"] .sc-marketplace .mp-waitlist-input::placeholder {
+  color: #8B8279;
+}
+
+[data-theme="light"] .sc-marketplace .mp-waitlist-input:focus,
+[data-theme="light"] .sc-marketplace .mp-waitlist-select:focus {
+  border-color: #F5A623;
+  background: #FFFFFF;
+}
+
+[data-theme="light"] .sc-marketplace .mp-waitlist-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234A4540' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .sc-marketplace .mp-waitlist-select option {
+  background: #FFFFFF;
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-marketplace .mp-waitlist-submit {
   background: #F5A623;
 }
 
-[data-theme="light"] .sc-marketplace .cta-btn:hover {
+[data-theme="light"] .sc-marketplace .mp-waitlist-submit:hover:not(:disabled) {
   background: #FFB840;
+}
+
+/* Vertical card light mode */
+[data-theme="light"] .sc-marketplace .mp-vertical-badge {
+  background: rgba(26,22,18,0.06);
+}
+
+[data-theme="light"] .sc-marketplace .mp-vertical-status {
+  background: rgba(245,166,35,0.1);
+  color: #B8891E;
+}
+
+[data-theme="light"] .sc-marketplace .mp-vertical-status-dot {
+  background: #B8891E;
+}
+
+[data-theme="light"] .sc-marketplace .vertical-card::before {
+  background: linear-gradient(135deg, rgba(245,166,35,0.04) 0%, rgba(232,102,74,0.03) 100%);
 }
 
 /* Footer — ALWAYS dark */
@@ -795,6 +1011,21 @@ const marketplaceCSS = `
 `;
 
 export default function Marketplace() {
+  // Waitlist form state
+  const [email, setEmail] = useState("");
+  const [side, setSide] = useState("seeking");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // Bottom CTA form state (separate)
+  const [ctaEmail, setCtaEmail] = useState("");
+  const [ctaSide, setCtaSide] = useState("seeking");
+  const [ctaSubmitting, setCtaSubmitting] = useState(false);
+  const [ctaSubmitted, setCtaSubmitted] = useState(false);
+
+  // Intersection Observer for vertical cards
+  const verticalsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Inject CSS
     const style = document.createElement("style");
@@ -804,10 +1035,64 @@ export default function Marketplace() {
     // Scroll to top on mount
     window.scrollTo(0, 0);
 
+    // Intersection Observer for vertical cards staggered entrance
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const cards = entry.target.querySelectorAll('.vertical-card');
+            cards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add('visible');
+              }, index * 100); // 100ms stagger
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (verticalsRef.current) {
+      observer.observe(verticalsRef.current);
+    }
+
     return () => {
       document.head.removeChild(style);
+      observer.disconnect();
     };
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent, isBottomCta = false) => {
+    e.preventDefault();
+    const currentEmail = isBottomCta ? ctaEmail : email;
+    const currentSide = isBottomCta ? ctaSide : side;
+    const setCurrentSubmitting = isBottomCta ? setCtaSubmitting : setSubmitting;
+    const setCurrentSubmitted = isBottomCta ? setCtaSubmitted : setSubmitted;
+
+    if (!currentEmail) return;
+
+    setCurrentSubmitting(true);
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: currentEmail,
+          source: "marketplace",
+          intent: currentSide,
+        }),
+      });
+
+      if (response.ok) {
+        setCurrentSubmitted(true);
+      }
+    } catch {
+      // Silent fail - could add error handling
+    } finally {
+      setCurrentSubmitting(false);
+    }
+  };
 
   return (
     <div className="sc-marketplace">
@@ -837,7 +1122,40 @@ export default function Marketplace() {
           SunClaw is building a multi-sided marketplace where every chat builds a profile,
           and every profile becomes a node in a matching network. Coming soon.
         </p>
-        <div className="coming-soon-badge">Coming Soon — Join the Waitlist</div>
+        {submitted ? (
+          <div className="mp-waitlist-success">
+            <span>✓</span> You're on the list. We'll be in touch.
+          </div>
+        ) : (
+          <form className="mp-waitlist-form" onSubmit={(e) => handleSubmit(e, false)}>
+            <input
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mp-waitlist-input"
+              required
+            />
+            <select
+              value={side}
+              onChange={(e) => setSide(e.target.value)}
+              className="mp-waitlist-select"
+            >
+              {SIDE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            <button
+              type="submit"
+              disabled={submitting || !email}
+              className="mp-waitlist-submit"
+            >
+              {submitting ? "Joining..." : "Join Waitlist"}
+            </button>
+          </form>
+        )}
       </section>
 
       {/* HOW IT WORKS */}
@@ -926,10 +1244,14 @@ export default function Marketplace() {
           Each vertical connects a specific supply to a specific demand.
           SunClaw handles the matching, introductions, and deal facilitation.
         </p>
-        <div className="verticals-grid">
+        <div className="verticals-grid" ref={verticalsRef}>
           {VERTICALS.map((v) => (
-            <div key={v.title} className="vertical-card">
-              <div className="vertical-card-icon">{v.icon}</div>
+            <div key={v.key} className="vertical-card">
+              <VerticalIcon badge={v.badge} />
+              <div className="mp-vertical-status">
+                <span className="mp-vertical-status-dot" />
+                Coming Soon
+              </div>
               <h3>{v.title}</h3>
               <p className="vertical-card-desc">{v.desc}</p>
               <div className="vertical-card-sides">
@@ -953,10 +1275,43 @@ export default function Marketplace() {
         <span className="mp-label">EARLY ACCESS</span>
         <h2>The marketplace is coming.</h2>
         <p>
-          Talk to SunClaw today to build your profile. When the marketplace launches,
-          you'll be first in line.
+          Join the waitlist to be first in line when the marketplace launches.
+          Tell us which side of the table you're on.
         </p>
-        <a href="/#talk" className="cta-btn">Talk to SunClaw →</a>
+        {ctaSubmitted ? (
+          <div className="mp-waitlist-success">
+            <span>✓</span> You're on the list. We'll be in touch.
+          </div>
+        ) : (
+          <form className="mp-waitlist-form" onSubmit={(e) => handleSubmit(e, true)}>
+            <input
+              type="email"
+              placeholder="your@email.com"
+              value={ctaEmail}
+              onChange={(e) => setCtaEmail(e.target.value)}
+              className="mp-waitlist-input"
+              required
+            />
+            <select
+              value={ctaSide}
+              onChange={(e) => setCtaSide(e.target.value)}
+              className="mp-waitlist-select"
+            >
+              {SIDE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+            <button
+              type="submit"
+              disabled={ctaSubmitting || !ctaEmail}
+              className="mp-waitlist-submit"
+            >
+              {ctaSubmitting ? "Joining..." : "Join Waitlist"}
+            </button>
+          </form>
+        )}
         <span className="cta-alt">
           Or <a href="/agent">deploy your own agent →</a>
         </span>
