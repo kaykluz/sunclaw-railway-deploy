@@ -529,15 +529,19 @@ export const appRouter = router({
         // Generate unique deep-link reference for Telegram
         const deepLink = `ref_${crypto.randomBytes(6).toString("hex")}`;
 
+        // Convert empty strings to null explicitly for nullable fields
+        const toNull = (v: string | undefined | null): string | null =>
+          (v && v.trim().length > 0) ? v.trim() : null;
+
         const result = await addToWaitlist({
-          email: input.email,
-          name: input.name ?? null,
-          company: input.company ?? null,
-          role: input.role ?? null,
-          source: input.source ?? "website",
-          phone: input.phone ?? null,
-          intent: input.intent ?? null,
-          region: input.region ?? null,
+          email: input.email.trim(),
+          name: toNull(input.name),
+          company: toNull(input.company),
+          role: toNull(input.role),
+          source: input.source || "website",
+          phone: toNull(input.phone),
+          intent: toNull(input.intent),
+          region: toNull(input.region),
           telegramDeepLink: deepLink,
         });
 
