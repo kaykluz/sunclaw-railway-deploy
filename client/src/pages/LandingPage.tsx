@@ -4,8 +4,10 @@
   All CSS from the original preserved via <style> injection
 */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ConversationalFunnel from "@/components/ConversationalFunnel";
+
+type HeroState = 'cards' | 'funnel';
 
 // The SVG inline components match the HTML file exactly
 function NavLogo() {
@@ -676,8 +678,6 @@ const landingCSS = `
   gap: 16px;
   position: relative;
   z-index: 2;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.9s;
 }
 
 .sc-landing .sc-funnel-bot-row {
@@ -1010,9 +1010,166 @@ const landingCSS = `
   .sc-landing .sc-funnel-user-bubble { max-width: 280px; }
   .sc-landing .sc-funnel-telegram-cta { width: 100%; justify-content: center; }
 }
+
+/* TWO-CARD HERO SYSTEM */
+.sc-landing .hero-cards {
+  display: flex;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.sc-landing .hero-card {
+  flex: 1;
+  max-width: 340px;
+  padding: 32px 28px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  text-decoration: none;
+  display: block;
+}
+
+.sc-landing .hero-card:hover {
+  border-color: rgba(245,166,35,0.3);
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+.sc-landing .hero-card--primary {
+  border-color: rgba(245,166,35,0.2);
+  background: linear-gradient(135deg, rgba(245,166,35,0.06), rgba(232,102,74,0.03));
+}
+
+.sc-landing .hero-card--primary:hover {
+  border-color: rgba(245,166,35,0.4);
+  background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(232,102,74,0.05));
+}
+
+.sc-landing .hero-card__icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.sc-landing .hero-card__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.sc-landing .hero-card--primary .hero-card__title {
+  color: var(--sun-gold);
+}
+
+.sc-landing .hero-card__desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.sc-landing .hero-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sun-gold);
+  transition: gap 0.3s;
+}
+
+.sc-landing .hero-card:hover .hero-card__cta {
+  gap: 12px;
+}
+
+/* Hero state transitions */
+.sc-landing .hero-section-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+}
+
+.sc-landing .hero-cards-container,
+.sc-landing .hero-funnel-container {
+  width: 100%;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sc-landing .hero-cards-container.hidden {
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.sc-landing .hero-funnel-container.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Back button */
+.sc-landing .funnel-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 24px;
+}
+
+.sc-landing .funnel-back-btn:hover {
+  border-color: rgba(245,166,35,0.3);
+  color: var(--sun-gold);
+}
+
+.sc-landing .funnel-back-btn:hover .funnel-back-arrow {
+  transform: translateX(-3px);
+}
+
+.sc-landing .funnel-back-arrow {
+  transition: transform 0.3s;
+}
+
+@media (max-width: 768px) {
+  .sc-landing .hero-cards {
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .sc-landing .hero-card {
+    max-width: 100%;
+  }
+}
 `;
 
 export default function LandingPage() {
+  const [heroState, setHeroState] = useState<HeroState>('cards');
+
   useEffect(() => {
     // Inject scoped CSS
     const style = document.createElement("style");
@@ -1023,14 +1180,36 @@ export default function LandingPage() {
   }, []);
 
   useEffect(() => {
-    // Smooth scroll to hash anchor if present
+    // Handle hash navigation
     const hash = window.location.hash;
-    if (hash === "#talk" || hash === "#marketplace" || hash === "#deploy" || hash === "#features") {
+    if (hash === "#talk") {
+      // Auto-show funnel when navigating to #talk
+      setHeroState('funnel');
+      setTimeout(() => {
+        document.getElementById("talk")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else if (hash === "#marketplace" || hash === "#deploy" || hash === "#features") {
       setTimeout(() => {
         document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     }
   }, []);
+
+  // Handle nav CTA click - scroll to hero and show funnel
+  const handleTalkClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setHeroState('funnel');
+    window.history.pushState(null, '', '#talk');
+    setTimeout(() => {
+      document.getElementById("talk")?.scrollIntoView({ behavior: "smooth" });
+    }, 50);
+  };
+
+  // Handle back to cards
+  const handleBackToCards = () => {
+    setHeroState('cards');
+    window.history.pushState(null, '', '/');
+  };
 
   const features = [
     { title: "Financial Modeling", desc: "LCOE, IRR, NPV, payback period. Run sensitivity analyses through conversation. Compare financing structures (lease vs PPA vs direct purchase). Generate investor-ready projections." },
@@ -1059,7 +1238,7 @@ export default function LandingPage() {
           <li><a href="#marketplace">Marketplace</a></li>
           <li><a href="/agent">For Developers</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="#talk" className="nav-cta">Talk to SunClaw</a></li>
+          <li><a href="#talk" className="nav-cta" onClick={handleTalkClick}>Talk to SunClaw</a></li>
         </ul>
       </nav>
 
@@ -1070,14 +1249,50 @@ export default function LandingPage() {
         <h1>The <span className="gold">energy conversation</span> the world's been waiting for.</h1>
         <p className="hero-sub">SunClaw is your AI-powered advisor for renewable energy. Whether you're developing a project or providing the services to build one, SunClaw matches you to the right people through conversation.</p>
 
-        <a href="#deploy" className="dev-strip">
-          <span className="dev-strip-icon">🤖</span>
-          <span className="dev-strip-text">Developers: deploy your own OpenClaw instance</span>
-          <span className="dev-strip-arrow">→</span>
-        </a>
+        <div id="talk" className="hero-section-wrapper">
+          {/* Two-card hero view */}
+          <div className={`hero-cards-container ${heroState === 'funnel' ? 'hidden' : ''}`}>
+            <div className="hero-cards">
+              <button
+                type="button"
+                className="hero-card hero-card--primary"
+                onClick={handleTalkClick}
+              >
+                <div className="hero-card__icon">💬</div>
+                <div className="hero-card__title">Talk to SunClaw</div>
+                <div className="hero-card__desc">
+                  Get matched with the right people in renewable energy. Join the waitlist and start building your profile through conversation.
+                </div>
+                <div className="hero-card__cta">
+                  Start talking <span>→</span>
+                </div>
+              </button>
 
-        <div id="talk">
-          <ConversationalFunnel />
+              <a href="/agent" className="hero-card">
+                <div className="hero-card__icon">🤖</div>
+                <div className="hero-card__title">Deploy Your Own Agent</div>
+                <div className="hero-card__desc">
+                  Want your own standalone AI? Launch an OpenClaw instance pre-loaded with 11 RE skills, running on your infrastructure or ours.
+                </div>
+                <div className="hero-card__cta">
+                  Set up now <span>→</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          {/* Funnel view */}
+          <div className={`hero-funnel-container ${heroState === 'cards' ? 'hidden' : ''}`}>
+            <button
+              type="button"
+              className="funnel-back-btn"
+              onClick={handleBackToCards}
+            >
+              <span className="funnel-back-arrow">←</span>
+              Back to options
+            </button>
+            <ConversationalFunnel />
+          </div>
         </div>
       </section>
 
@@ -1266,7 +1481,7 @@ export default function LandingPage() {
           <CtaLogo />
           <h2>Clean energy starts<br/>with a <span style={{ color: "var(--sun-gold)" }}>message</span>.</h2>
           <p>Whether you're building projects or providing the services to build them, join the waitlist for the conversational operating system for renewable energy.</p>
-          <a href="#talk" className="btn-primary" style={{ display: "inline-block" }}>Start the conversation</a>
+          <a href="#talk" className="btn-primary" style={{ display: "inline-block" }} onClick={handleTalkClick}>Start the conversation</a>
         </div>
       </section>
 
