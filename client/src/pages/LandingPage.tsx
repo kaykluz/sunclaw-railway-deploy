@@ -6,6 +6,7 @@
 
 import { useEffect, useState } from "react";
 import ConversationalFunnel from "@/components/ConversationalFunnel";
+import { SunClawIcon } from "@/components/SunClawLogo";
 
 type HeroState = 'cards' | 'funnel';
 
@@ -1013,82 +1014,147 @@ const landingCSS = `
 
 /* TWO-CARD HERO SYSTEM */
 .sc-landing .hero-cards {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
+  max-width: 880px;
+  width: 100%;
+  margin: 56px auto 0;
+  padding: 0 24px;
   position: relative;
   z-index: 2;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards 0.8s;
 }
 
-.sc-landing .hero-card {
-  flex: 1;
-  max-width: 340px;
-  padding: 32px 28px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.02);
+.sc-landing .hero-product-card {
+  padding: 40px 36px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.025);
   border: 1px solid rgba(255,255,255,0.08);
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: left;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
-  display: block;
+  color: inherit;
+  min-height: 320px;
+  text-align: left;
 }
 
-.sc-landing .hero-card:hover {
+/* Talk to SunClaw — Gold Warmth */
+.sc-landing .hero-card-talk {
+  background: rgba(245,166,35,0.03);
+  border: 1px solid rgba(245,166,35,0.1);
+}
+
+.sc-landing .hero-card-talk:hover {
   border-color: rgba(245,166,35,0.3);
-  background: rgba(255,255,255,0.04);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  background: rgba(245,166,35,0.06);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(245,166,35,0.1), 0 0 0 1px rgba(245,166,35,0.15);
 }
 
-.sc-landing .hero-card--primary {
-  border-color: rgba(245,166,35,0.2);
-  background: linear-gradient(135deg, rgba(245,166,35,0.06), rgba(232,102,74,0.03));
+/* Deploy Your Own Agent — Coral Tech */
+.sc-landing .hero-card-deploy {
+  background: rgba(232,102,74,0.03);
+  border: 1px solid rgba(232,102,74,0.1);
 }
 
-.sc-landing .hero-card--primary:hover {
-  border-color: rgba(245,166,35,0.4);
-  background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(232,102,74,0.05));
+.sc-landing .hero-card-deploy:hover {
+  border-color: rgba(232,102,74,0.3);
+  background: rgba(232,102,74,0.06);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(232,102,74,0.1), 0 0 0 1px rgba(232,102,74,0.15);
 }
 
-.sc-landing .hero-card__icon {
-  font-size: 36px;
-  margin-bottom: 16px;
+/* Icon Wrap */
+.sc-landing .hero-card-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.sc-landing .hero-card__title {
+.sc-landing .hero-card-icon-talk {
+  background: rgba(245,166,35,0.1);
+  border: 1px solid rgba(245,166,35,0.15);
+}
+
+.sc-landing .hero-card-icon-deploy {
+  background: rgba(232,102,74,0.1);
+  border: 1px solid rgba(232,102,74,0.15);
+}
+
+/* Title */
+.sc-landing .hero-card-title {
   font-family: 'Outfit', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 26px;
   color: var(--text-primary);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
-.sc-landing .hero-card--primary .hero-card__title {
-  color: var(--sun-gold);
+.sc-landing .hero-card-talk .hero-card-title {
+  color: #F5A623;
 }
 
-.sc-landing .hero-card__desc {
-  font-size: 14px;
+.sc-landing .hero-card-deploy .hero-card-title {
+  color: #E8664A;
+}
+
+/* Description */
+.sc-landing .hero-card-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 16px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex: 1;
 }
 
-.sc-landing .hero-card__cta {
+/* Audiences / Tiers */
+.sc-landing .hero-card-audiences,
+.sc-landing .hero-card-tiers {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.sc-landing .hero-card-tier-dot {
+  color: rgba(255,255,255,0.15);
+  margin: 0 2px;
+}
+
+/* CTA */
+.sc-landing .hero-card-cta {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #F5A623;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Outfit', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--sun-gold);
+  margin-top: auto;
   transition: gap 0.3s;
 }
 
-.sc-landing .hero-card:hover .hero-card__cta {
-  gap: 12px;
+.sc-landing .hero-card-cta-deploy {
+  color: #E8664A;
+}
+
+.sc-landing .hero-card-arrow {
+  transition: transform 0.3s;
+}
+
+.sc-landing .hero-product-card:hover .hero-card-arrow {
+  transform: translateX(4px);
 }
 
 /* Hero state transitions */
@@ -1156,13 +1222,14 @@ const landingCSS = `
 
 @media (max-width: 768px) {
   .sc-landing .hero-cards {
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 40px;
+    padding: 0 16px;
   }
-  .sc-landing .hero-card {
-    max-width: 100%;
+  .sc-landing .hero-product-card {
+    padding: 32px 28px;
+    min-height: auto;
   }
 }
 `;
@@ -1255,28 +1322,47 @@ export default function LandingPage() {
             <div className="hero-cards">
               <button
                 type="button"
-                className="hero-card hero-card--primary"
+                className="hero-product-card hero-card-talk"
                 onClick={handleTalkClick}
               >
-                <div className="hero-card__icon">💬</div>
-                <div className="hero-card__title">Talk to SunClaw</div>
-                <div className="hero-card__desc">
-                  Get matched with the right people in renewable energy. Join the waitlist and start building your profile through conversation.
+                <div className="hero-card-icon-wrap hero-card-icon-talk">
+                  <SunClawIcon size={48} />
                 </div>
-                <div className="hero-card__cta">
-                  Start talking <span>→</span>
+                <h3 className="hero-card-title">Talk to SunClaw</h3>
+                <p className="hero-card-desc">
+                  Your AI advisor for renewable energy. Get matched to the right
+                  people, find services, explore opportunities — all through conversation.
+                </p>
+                <div className="hero-card-audiences">
+                  Developers · Investors · Installers · Job seekers · Everyone in RE
                 </div>
+                <span className="hero-card-cta">
+                  Start talking <span className="hero-card-arrow">→</span>
+                </span>
               </button>
 
-              <a href="/agent" className="hero-card">
-                <div className="hero-card__icon">🤖</div>
-                <div className="hero-card__title">Deploy Your Own Agent</div>
-                <div className="hero-card__desc">
-                  Want your own standalone AI? Launch an OpenClaw instance pre-loaded with 11 RE skills, running on your infrastructure or ours.
+              <a href="/agent" className="hero-product-card hero-card-deploy">
+                <div className="hero-card-icon-wrap hero-card-icon-deploy">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none">
+                    <path d="M16 18l6-6-6-6" stroke="#E8664A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8 6l-6 6 6 6" stroke="#E8664A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
-                <div className="hero-card__cta">
-                  Set up now <span>→</span>
+                <h3 className="hero-card-title">Deploy Your Own Agent</h3>
+                <p className="hero-card-desc">
+                  A standalone OpenClaw instance pre-loaded with 11 renewable energy
+                  skills. Your infrastructure, your data, your bot.
+                </p>
+                <div className="hero-card-tiers">
+                  <span>Free</span>
+                  <span className="hero-card-tier-dot">·</span>
+                  <span>Pro $29/mo</span>
+                  <span className="hero-card-tier-dot">·</span>
+                  <span>Enterprise $99/mo</span>
                 </div>
+                <span className="hero-card-cta hero-card-cta-deploy">
+                  Set up now <span className="hero-card-arrow">→</span>
+                </span>
               </a>
             </div>
           </div>
