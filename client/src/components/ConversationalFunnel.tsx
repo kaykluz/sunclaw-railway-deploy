@@ -3,8 +3,17 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { SunClawIcon } from "@/components/SunClawLogo";
 
-type Step = "intent" | "role" | "region" | "form" | "complete";
-type Intent = "need_services" | "offer_services" | "deploy" | null;
+type Step = "role" | "region" | "form" | "complete";
+type Role =
+  | "energy_buyer"
+  | "developer"
+  | "service_provider"
+  | "investor"
+  | "talent"
+  | "supplier"
+  | "researcher"
+  | "curious"
+  | null;
 
 interface FormData {
   name: string;
@@ -13,29 +22,56 @@ interface FormData {
   company: string;
 }
 
-const INTENT_OPTIONS = [
-  { id: "need_services", icon: "☀️", label: "I need RE advisory / services" },
-  { id: "offer_services", icon: "🔧", label: "I offer RE services" },
-  { id: "deploy", icon: "🤖", label: "I want to deploy my own agent" },
+const ROLE_OPTIONS = [
+  {
+    id: "energy_buyer",
+    icon: "☀️",
+    label: "I need renewable energy",
+    descriptor: "C&I, utility, government",
+  },
+  {
+    id: "developer",
+    icon: "🏗️",
+    label: "I develop RE projects",
+    descriptor: "IPP, mini-grid, rooftop",
+  },
+  {
+    id: "service_provider",
+    icon: "🔧",
+    label: "I provide RE services",
+    descriptor: "EPC, O&M, consultant",
+  },
+  {
+    id: "investor",
+    icon: "💰",
+    label: "I finance RE projects",
+    descriptor: "DFI, PE, VC, bank",
+  },
+  {
+    id: "talent",
+    icon: "👤",
+    label: "I'm looking for work",
+    descriptor: "Job seeker, freelancer",
+  },
+  {
+    id: "supplier",
+    icon: "📦",
+    label: "I supply RE equipment",
+    descriptor: "OEM, distributor, trader",
+  },
+  {
+    id: "researcher",
+    icon: "📊",
+    label: "I research the sector",
+    descriptor: "Academic, analyst, journalist",
+  },
+  {
+    id: "curious",
+    icon: "🌱",
+    label: "Just curious",
+    descriptor: "Exploring options",
+  },
 ] as const;
-
-const ROLE_OPTIONS_NEED = [
-  "Project Developer",
-  "Asset Owner",
-  "C&I Client",
-  "Utility",
-  "Government",
-  "Other",
-];
-
-const ROLE_OPTIONS_OFFER = [
-  "Installer / EPC",
-  "Financier / Investor",
-  "Consultant",
-  "Equipment Supplier",
-  "Recruiter",
-  "Other",
-];
 
 const REGION_OPTIONS = [
   { id: "west_africa", label: "West Africa" },
@@ -49,9 +85,8 @@ const REGION_OPTIONS = [
 ];
 
 export default function ConversationalFunnel() {
-  const [step, setStep] = useState<Step>("intent");
-  const [intent, setIntent] = useState<Intent>(null);
-  const [role, setRole] = useState<string | null>(null);
+  const [step, setStep] = useState<Step>("role");
+  const [role, setRole] = useState<Role>(null);
   const [region, setRegion] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -80,18 +115,14 @@ export default function ConversationalFunnel() {
     },
   });
 
-  const handleIntentSelect = (selectedIntent: Intent) => {
-    setIntent(selectedIntent);
-    if (selectedIntent === "deploy") {
-      setStep("region");
-    } else {
-      setStep("role");
-    }
-  };
-
-  const handleRoleSelect = (selectedRole: string) => {
+  const handleRoleSelect = (selectedRole: Role) => {
     setRole(selectedRole);
-    setStep("region");
+    // "Curious" fast path: skip region, go straight to form
+    if (selectedRole === "curious") {
+      setStep("form");
+    } else {
+      setStep("region");
+    }
   };
 
   const handleRegionSelect = (selectedRegion: string) => {
@@ -109,15 +140,14 @@ export default function ConversationalFunnel() {
       phone: formData.phone || undefined,
       company: formData.company || undefined,
       role: role || undefined,
-      intent: intent || undefined,
+      intent: undefined, // deprecated field
       region: region || undefined,
       source: "funnel",
     });
   };
 
-  const handleDeployRedirect = () => {
-    window.location.href = "/agent/setup";
-  };
+  // Check if this is the "curious" fast path (minimal form)
+  const isCuriousFastPath = role === "curious";
 
   // Message components
   const BotMessage = ({
@@ -147,6 +177,33 @@ export default function ConversationalFunnel() {
     </div>
   );
 
+  const RoleCard = ({
+    icon,
+    label,
+    descriptor,
+    onClick,
+    delay = 0,
+  }: {
+    icon: string;
+    label: string;
+    descriptor: string;
+    onClick: () => void;
+    delay?: number;
+  }) => (
+    <button
+      type="button"
+      className="sc-funnel-role"
+      onClick={onClick}
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <span className="sc-funnel-role-icon">{icon}</span>
+      <div className="sc-funnel-role-text">
+        <span className="sc-funnel-role-label">{label}</span>
+        <span className="sc-funnel-role-descriptor">{descriptor}</span>
+      </div>
+    </button>
+  );
+
   const ChoiceCard = ({
     icon,
     label,
@@ -171,60 +228,32 @@ export default function ConversationalFunnel() {
 
   return (
     <div className="sc-funnel">
-      {/* Step 1: Intent */}
+      {/* Step 1: Role Selection */}
       <BotMessage animate={false}>What brings you here today?</BotMessage>
 
-      {step === "intent" && (
-        <div className="sc-funnel-choices">
-          {INTENT_OPTIONS.map((opt, i) => (
-            <ChoiceCard
+      {step === "role" && (
+        <div className="sc-funnel-roles">
+          {ROLE_OPTIONS.map((opt, i) => (
+            <RoleCard
               key={opt.id}
               icon={opt.icon}
               label={opt.label}
-              onClick={() => handleIntentSelect(opt.id as Intent)}
-              delay={i * 50}
+              descriptor={opt.descriptor}
+              onClick={() => handleRoleSelect(opt.id as Role)}
+              delay={i * 40}
             />
           ))}
         </div>
       )}
 
-      {/* Show user's intent selection */}
-      {intent && step !== "intent" && (
+      {/* Show user's role selection */}
+      {role && step !== "role" && (
         <UserMessage>
-          {INTENT_OPTIONS.find((o) => o.id === intent)?.label}
+          {ROLE_OPTIONS.find((o) => o.id === role)?.label}
         </UserMessage>
       )}
 
-      {/* Step 2: Role (conditional) */}
-      {step === "role" && intent && intent !== "deploy" && (
-        <>
-          <BotMessage>
-            {intent === "need_services"
-              ? "What best describes you?"
-              : "What type of services do you offer?"}
-          </BotMessage>
-          <div className="sc-funnel-choices">
-            {(intent === "need_services"
-              ? ROLE_OPTIONS_NEED
-              : ROLE_OPTIONS_OFFER
-            ).map((r, i) => (
-              <ChoiceCard
-                key={r}
-                label={r}
-                onClick={() => handleRoleSelect(r)}
-                delay={i * 50}
-              />
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Show user's role selection */}
-      {role && (step === "region" || step === "form" || step === "complete") && (
-        <UserMessage>{role}</UserMessage>
-      )}
-
-      {/* Step 3: Region */}
+      {/* Step 2: Region (skipped for "curious") */}
       {step === "region" && (
         <>
           <BotMessage>Where are you based?</BotMessage>
@@ -249,10 +278,14 @@ export default function ConversationalFunnel() {
         </UserMessage>
       )}
 
-      {/* Step 4: Form */}
+      {/* Step 3: Form */}
       {step === "form" && (
         <>
-          <BotMessage>Almost there. Let me know how to reach you.</BotMessage>
+          <BotMessage>
+            {isCuriousFastPath
+              ? "Great! Just your name and email to get started."
+              : "Almost there. Let me know how to reach you."}
+          </BotMessage>
           <form className="sc-funnel-form" onSubmit={handleFormSubmit}>
             <input
               type="text"
@@ -273,24 +306,29 @@ export default function ConversationalFunnel() {
               }
               className="sc-funnel-input"
             />
-            <input
-              type="tel"
-              placeholder="Phone / WhatsApp (optional)"
-              value={formData.phone}
-              onChange={(e) =>
-                setFormData((f) => ({ ...f, phone: e.target.value }))
-              }
-              className="sc-funnel-input"
-            />
-            <input
-              type="text"
-              placeholder="Company (optional)"
-              value={formData.company}
-              onChange={(e) =>
-                setFormData((f) => ({ ...f, company: e.target.value }))
-              }
-              className="sc-funnel-input"
-            />
+            {/* Only show phone and company for non-curious users */}
+            {!isCuriousFastPath && (
+              <>
+                <input
+                  type="tel"
+                  placeholder="Phone / WhatsApp (optional)"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData((f) => ({ ...f, phone: e.target.value }))
+                  }
+                  className="sc-funnel-input"
+                />
+                <input
+                  type="text"
+                  placeholder="Company (optional)"
+                  value={formData.company}
+                  onChange={(e) =>
+                    setFormData((f) => ({ ...f, company: e.target.value }))
+                  }
+                  className="sc-funnel-input"
+                />
+              </>
+            )}
             <button
               type="submit"
               disabled={joinMutation.isPending || !formData.email}
@@ -302,46 +340,27 @@ export default function ConversationalFunnel() {
         </>
       )}
 
-      {/* Step 5: Completion */}
+      {/* Step 4: Completion */}
       {step === "complete" && (
         <>
-          {intent === "deploy" ? (
-            <>
-              <BotMessage>
-                Great choice. Let's set up your own SunClaw agent.
-              </BotMessage>
-              <div className="sc-funnel-cta-row">
-                <button
-                  type="button"
-                  className="sc-funnel-submit"
-                  onClick={handleDeployRedirect}
-                >
-                  Launch Setup Wizard
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <BotMessage>
-                SunClaw is ready to talk. Message the bot to start your
-                conversation.
-              </BotMessage>
-              <div className="sc-funnel-cta-row">
-                <a
-                  href={telegramLink || "https://t.me/sunclaw_KIISHA_bot"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sc-funnel-submit"
-                >
-                  Open Telegram
-                </a>
-              </div>
-              <p className="sc-funnel-note">
-                You're on the marketplace waitlist. We'll notify you when it
-                launches.
-              </p>
-            </>
-          )}
+          <BotMessage>
+            SunClaw is ready to talk. Message the bot to start your
+            conversation.
+          </BotMessage>
+          <div className="sc-funnel-cta-row">
+            <a
+              href={telegramLink || "https://t.me/sunclaw_KIISHA_bot"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sc-funnel-submit"
+            >
+              Open Telegram
+            </a>
+          </div>
+          <p className="sc-funnel-note">
+            You're on the marketplace waitlist. We'll notify you when it
+            launches.
+          </p>
         </>
       )}
     </div>

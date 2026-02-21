@@ -291,11 +291,132 @@ const landingCSS = `
   .sc-landing .proof-divider { display: none; }
 }
 
+/* HERO TRACKS (Two-Column Layout) */
+.sc-landing .hero-tracks {
+  display: grid;
+  grid-template-columns: 65fr 35fr;
+  gap: 32px;
+  width: 100%;
+  max-width: 1100px;
+  align-items: flex-start;
+}
+
+.sc-landing .hero-track-left {
+  min-width: 0;
+}
+
+.sc-landing .hero-track-right {
+  min-width: 0;
+}
+
+/* DEPLOY CARD */
+.sc-landing .deploy-card {
+  padding: 32px 28px;
+  border-radius: 20px;
+  background: rgba(232,102,74,0.06);
+  border: 1px solid rgba(232,102,74,0.15);
+  position: sticky;
+  top: 100px;
+}
+
+.sc-landing .deploy-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(232,102,74,0.12);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--lobster-coral);
+  margin-bottom: 16px;
+}
+
+.sc-landing .deploy-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.sc-landing .deploy-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.sc-landing .deploy-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.sc-landing .deploy-tier {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.sc-landing .deploy-tier-check {
+  color: var(--lobster-coral);
+  font-size: 12px;
+}
+
+.sc-landing .deploy-terminal {
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.3);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.sc-landing .deploy-terminal .cmd {
+  color: var(--lobster-coral);
+}
+
+.sc-landing .deploy-terminal .arg {
+  color: var(--text-secondary);
+}
+
+.sc-landing .deploy-card-cta {
+  display: block;
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 100px;
+  background: var(--lobster-coral);
+  color: var(--deep-earth);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sc-landing .deploy-card-cta:hover {
+  background: #F07A5E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,102,74,0.25);
+}
+
 /* CONVERSATIONAL FUNNEL */
 .sc-landing .sc-funnel {
   max-width: 520px;
   width: 100%;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -383,6 +504,63 @@ const landingCSS = `
   color: var(--text-primary);
 }
 
+/* Role picker with descriptors */
+.sc-landing .sc-funnel-roles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-left: 36px;
+}
+
+.sc-landing .sc-funnel-role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+  opacity: 0;
+  animation: scFunnelFadeUp 0.3s ease forwards;
+}
+
+.sc-landing .sc-funnel-role:hover {
+  border-color: rgba(245,166,35,0.2);
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-2px);
+}
+
+.sc-landing .sc-funnel-role-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.sc-landing .sc-funnel-role-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sc-landing .sc-funnel-role-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sc-landing .sc-funnel-role-descriptor {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
 .sc-landing .sc-funnel-form {
   display: flex;
   flex-direction: column;
@@ -458,10 +636,23 @@ const landingCSS = `
   to { opacity: 1; transform: translateY(0); }
 }
 
+@media (max-width: 900px) {
+  .sc-landing .hero-tracks {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .sc-landing .deploy-card {
+    position: static;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 768px) {
   .sc-landing .sc-funnel { max-width: 100%; }
   .sc-landing .sc-funnel-choices { margin-left: 0; }
   .sc-landing .sc-funnel-choices-grid { grid-template-columns: 1fr; }
+  .sc-landing .sc-funnel-roles { margin-left: 0; grid-template-columns: 1fr; }
   .sc-landing .sc-funnel-form { margin-left: 0; }
   .sc-landing .sc-funnel-cta-row { margin-left: 0; }
   .sc-landing .sc-funnel-note { margin-left: 0; }
@@ -481,10 +672,11 @@ export default function LandingPage() {
   }, []);
 
   useEffect(() => {
-    // Smooth scroll to #talk if hash is present
-    if (window.location.hash === "#talk") {
+    // Smooth scroll to hash anchor if present
+    const hash = window.location.hash;
+    if (hash === "#talk" || hash === "#marketplace") {
       setTimeout(() => {
-        document.getElementById("talk")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     }
   }, []);
@@ -499,7 +691,7 @@ export default function LandingPage() {
         </a>
         <ul className="nav-links">
           <li><a href="#features">Features</a></li>
-          <li><a href="/marketplace">Marketplace</a></li>
+          <li><a href="#marketplace">Marketplace</a></li>
           <li><a href="/agent">For Developers</a></li>
           <li><a href="/blog">Blog</a></li>
           <li><a href="#talk" className="nav-cta">Talk to SunClaw</a></li>
@@ -512,8 +704,39 @@ export default function LandingPage() {
         <div className="hero-logo"><HeroLogo /></div>
         <h1>The <span className="gold">energy conversation</span> the world's been waiting for.</h1>
         <p className="hero-sub">SunClaw is your AI-powered advisor for renewable energy. Whether you're developing a project or providing the services to build one, SunClaw matches you to the right people through conversation.</p>
-        <div id="talk" className="hero-ctas" style={{ width: '100%', maxWidth: 560 }}>
-          <ConversationalFunnel />
+        <div id="talk" className="hero-tracks">
+          <div className="hero-track-left">
+            <ConversationalFunnel />
+          </div>
+          <div className="hero-track-right">
+            <div className="deploy-card" id="marketplace">
+              <div className="deploy-card-badge">🤖 For Developers</div>
+              <h3>Deploy your own<br/>SunClaw agent</h3>
+              <p>Get a personal AI agent pre-loaded with 11 RE skills, running on your own infrastructure or ours.</p>
+              <div className="deploy-tiers">
+                <div className="deploy-tier">
+                  <span className="deploy-tier-check">✓</span>
+                  <span>Free: guided self-setup, BYO keys</span>
+                </div>
+                <div className="deploy-tier">
+                  <span className="deploy-tier-check">✓</span>
+                  <span>Pro ($29/mo): managed hosting, 3 bots</span>
+                </div>
+                <div className="deploy-tier">
+                  <span className="deploy-tier-check">✓</span>
+                  <span>Enterprise ($99/mo): dedicated infra</span>
+                </div>
+              </div>
+              <div className="deploy-terminal">
+                <span className="cmd">$</span> <span className="arg">npx sunclaw setup</span><br/>
+                <span>  ☞ Loading 11 RE skills...</span><br/>
+                <span>  ☞ Solar Irradiance ✓</span><br/>
+                <span>  ☞ LCOE Calculator ✓</span><br/>
+                <span>  ☞ PV Design ✓</span>
+              </div>
+              <a href="/agent/setup" className="deploy-card-cta">Launch Setup Wizard</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -692,8 +915,7 @@ export default function LandingPage() {
           <CtaLogo />
           <h2>Clean energy starts<br/>with a <span style={{ color: "var(--sun-gold)" }}>message</span>.</h2>
           <p>Whether you're building projects or providing the services to build them, join the waitlist for the conversational operating system for renewable energy.</p>
-          <a href="#talk" className="btn-primary" style={{ display: "inline-block" }}>Talk to SunClaw</a>
-          <a href="/agent/setup" className="btn-secondary" style={{ display: "inline-block", marginLeft: 12 }}>Deploy Your Own Agent</a>
+          <a href="#talk" className="btn-primary" style={{ display: "inline-block" }}>Start the Conversation</a>
         </div>
       </section>
 
