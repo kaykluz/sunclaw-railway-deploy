@@ -153,6 +153,10 @@ export const waitlist = mysqlTable("waitlist", {
   company: varchar("company", { length: 255 }),
   role: varchar("userRole", { length: 128 }),
   source: varchar("source", { length: 64 }).default("website"),
+  phone: varchar("phone", { length: 32 }),
+  intent: varchar("intent", { length: 32 }),
+  region: varchar("region", { length: 64 }),
+  telegramDeepLink: varchar("telegramDeepLink", { length: 128 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
