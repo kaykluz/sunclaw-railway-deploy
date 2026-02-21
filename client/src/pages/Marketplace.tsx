@@ -676,54 +676,121 @@ const marketplaceCSS = `
   }
 }
 
-/* LIGHT MODE */
+/* LIGHT MODE — Brand-compliant Soft Cream palette */
 [data-theme="light"] .sc-marketplace {
+  /* Backgrounds */
   --bg-primary: #FFF8F0;
+  --bg-secondary: #FFFFFF;
   --bg-card: #FFFFFF;
-  --text-primary: #1A1612;
-  --text-secondary: #5A534B;
-  --text-muted: #8B8279;
-  --sun-gold: #D48C1A;
-  --lobster-coral: #D15A3E;
+  --bg-card-hover: #FFFCF7;
+  /* Borders */
   --border-subtle: rgba(26,22,18,0.08);
+  --border-hover: rgba(26,22,18,0.15);
+  /* Text — Deep Earth as primary */
+  --text-primary: #1A1612;
+  --text-secondary: #4A4540;
+  --text-muted: #8B8279;
+  /* Brand colors — FULL SATURATION on light */
+  --sun-gold: #F5A623;
+  --lobster-coral: #E8664A;
 }
 
 [data-theme="light"] .sc-marketplace .sc-nav {
-  background: rgba(255,248,240,0.85);
+  background: rgba(255,248,240,0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom-color: rgba(26,22,18,0.06);
 }
 
+[data-theme="light"] .sc-marketplace .nav-links a {
+  color: #4A4540;
+}
+
+[data-theme="light"] .sc-marketplace .nav-links a:hover {
+  color: #1A1612;
+}
+
 [data-theme="light"] .sc-marketplace .nav-cta {
-  background: #D48C1A;
+  background: #F5A623;
 }
 
 [data-theme="light"] .sc-marketplace .nav-cta:hover {
-  background: #C07F17;
+  background: #FFB840;
 }
 
+/* Cards — WHITE backgrounds */
 [data-theme="light"] .sc-marketplace .step-card,
 [data-theme="light"] .sc-marketplace .audience-card,
 [data-theme="light"] .sc-marketplace .vertical-card {
   background: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid rgba(26,22,18,0.06);
+  box-shadow: 0 2px 8px rgba(26,22,18,0.03);
 }
 
 [data-theme="light"] .sc-marketplace .step-card:hover,
 [data-theme="light"] .sc-marketplace .audience-card:hover,
 [data-theme="light"] .sc-marketplace .vertical-card:hover {
-  box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+  border-color: rgba(245,166,35,0.2);
+  box-shadow: 0 12px 36px rgba(26,22,18,0.08);
 }
 
+[data-theme="light"] .sc-marketplace .step-card h3,
+[data-theme="light"] .sc-marketplace .audience-card h3,
+[data-theme="light"] .sc-marketplace .vertical-card h3 {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-marketplace .step-card p,
+[data-theme="light"] .sc-marketplace .audience-card p,
+[data-theme="light"] .sc-marketplace .vertical-card p {
+  color: #4A4540;
+}
+
+[data-theme="light"] .sc-marketplace .audience-card-seek h3 {
+  color: #F5A623;
+}
+
+[data-theme="light"] .sc-marketplace .audience-card-offer h3 {
+  color: #E8664A;
+}
+
+/* Section headings */
+[data-theme="light"] .sc-marketplace .mp-label {
+  color: #F5A623;
+}
+
+[data-theme="light"] .sc-marketplace .mp-hero h1,
+[data-theme="light"] .sc-marketplace .mp-section h2,
+[data-theme="light"] .sc-marketplace .cta-section h2 {
+  color: #1A1612;
+}
+
+[data-theme="light"] .sc-marketplace .mp-hero > p,
+[data-theme="light"] .sc-marketplace .mp-desc,
+[data-theme="light"] .sc-marketplace .cta-section > p {
+  color: #4A4540;
+}
+
+/* Coming Soon badge */
+[data-theme="light"] .sc-marketplace .coming-soon-badge {
+  background: rgba(245,166,35,0.08);
+  border-color: rgba(245,166,35,0.15);
+  color: #B8891E;
+}
+
+/* CTA button */
 [data-theme="light"] .sc-marketplace .cta-btn {
-  background: #D48C1A;
+  background: #F5A623;
 }
 
 [data-theme="light"] .sc-marketplace .cta-btn:hover {
-  background: #C07F17;
+  background: #FFB840;
 }
 
+/* Footer — ALWAYS dark */
 [data-theme="light"] .sc-marketplace .sc-footer {
-  border-top-color: rgba(26,22,18,0.06);
+  background: #1A1612;
+  border-top-color: transparent;
 }
 `;
 
