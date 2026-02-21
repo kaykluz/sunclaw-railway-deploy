@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { SunClawIcon } from "@/components/SunClawLogo";
@@ -69,7 +69,7 @@ const ROLE_OPTIONS = [
     id: "curious",
     icon: "💬",
     label: "Just show me what SunClaw can do",
-    descriptor: null, // No descriptor for curious
+    descriptor: null,
   },
 ] as const;
 
@@ -84,6 +84,22 @@ const REGION_OPTIONS = [
   { id: "global", label: "Global / Multiple Regions" },
 ];
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Typing indicator component
+const TypingIndicator = () => (
+  <div className="sc-funnel-bot-row">
+    <div className="sc-funnel-bot-avatar">
+      <SunClawIcon size={24} />
+    </div>
+    <div className="sc-funnel-typing">
+      <span className="sc-funnel-typing-dot" />
+      <span className="sc-funnel-typing-dot" />
+      <span className="sc-funnel-typing-dot" />
+    </div>
+  </div>
+);
+
 export default function ConversationalFunnel() {
   const [step, setStep] = useState<Step>("role");
   const [role, setRole] = useState<Role>(null);
@@ -96,13 +112,24 @@ export default function ConversationalFunnel() {
   });
   const [telegramLink, setTelegramLink] = useState<string | null>(null);
 
+  // Animation states
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [showTyping, setShowTyping] = useState(false);
+  const [userBubbles, setUserBubbles] = useState<Array<{ key: string; text: string; entering: boolean }>>([]);
+  const [stepEntering, setStepEntering] = useState(true);
+
   const joinMutation = trpc.waitlist.join.useMutation({
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       if (data.telegramDeepLink) {
         setTelegramLink(
           `https://t.me/sunclaw_KIISHA_bot?start=${data.telegramDeepLink}`
         );
       }
+      // Show typing before completion
+      setShowTyping(true);
+      await delay(500);
+      setShowTyping(false);
+      setStepEntering(true);
       setStep("complete");
       if (data.alreadyExists) {
         toast.info("Welcome back! You're already on the list.");
@@ -115,20 +142,68 @@ export default function ConversationalFunnel() {
     },
   });
 
-  const handleRoleSelect = (selectedRole: Role) => {
+  const addUserBubble = useCallback((key: string, text: string) => {
+    setUserBubbles((prev) => [...prev, { key, text, entering: true }]);
+    // Remove entering class after animation
+    setTimeout(() => {
+      setUserBubbles((prev) =>
+        prev.map((b) => (b.key === key ? { ...b, entering: false } : b))
+      );
+    }, 300);
+  }, []);
+
+  const handleRoleSelect = useCallback(async (selectedRole: Role) => {
+    const roleLabel = ROLE_OPTIONS.find((o) => o.id === selectedRole)?.label || "";
+
+    // 1. Flash selected
+    setSelectedCard(selectedRole);
+    setStepEntering(false);
+    await delay(200);
+
+    // 2. Add user bubble
+    addUserBubble(`role-${selectedRole}`, roleLabel);
     setRole(selectedRole);
-    // "Curious" fast path: skip region, go straight to minimal form
+    await delay(300);
+
+    // 3. Show typing indicator
+    setShowTyping(true);
+    await delay(500);
+
+    // 4. Hide typing, show next step
+    setShowTyping(false);
+    setSelectedCard(null);
+    setStepEntering(true);
+
     if (selectedRole === "curious") {
       setStep("form");
     } else {
       setStep("region");
     }
-  };
+  }, [addUserBubble]);
 
-  const handleRegionSelect = (selectedRegion: string) => {
+  const handleRegionSelect = useCallback(async (selectedRegion: string) => {
+    const regionLabel = REGION_OPTIONS.find((r) => r.id === selectedRegion)?.label || "";
+
+    // 1. Flash selected
+    setSelectedCard(selectedRegion);
+    setStepEntering(false);
+    await delay(200);
+
+    // 2. Add user bubble
+    addUserBubble(`region-${selectedRegion}`, regionLabel);
     setRegion(selectedRegion);
+    await delay(300);
+
+    // 3. Show typing
+    setShowTyping(true);
+    await delay(500);
+
+    // 4. Show form
+    setShowTyping(false);
+    setSelectedCard(null);
+    setStepEntering(true);
     setStep("form");
-  };
+  }, [addUserBubble]);
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,50 +215,45 @@ export default function ConversationalFunnel() {
       phone: formData.phone || undefined,
       company: formData.company || undefined,
       role: role || undefined,
-      intent: role || undefined, // Store role as intent for backwards compatibility
+      intent: role || undefined,
       region: region || undefined,
       source: "funnel",
     });
   };
 
-  // Check if this is the "curious" fast path (minimal form)
   const isCuriousFastPath = role === "curious";
 
   // Message components
   const BotMessage = ({
     children,
     animate = true,
+    isComplete = false,
   }: {
     children: React.ReactNode;
     animate?: boolean;
+    isComplete?: boolean;
   }) => (
     <div
-      className="sc-funnel-bot-row"
-      style={animate ? { animation: "scFunnelFadeUp 0.3s ease forwards" } : {}}
+      className={`sc-funnel-bot-row ${stepEntering && animate ? "sc-funnel-step-enter" : ""}`}
     >
       <div className="sc-funnel-bot-avatar">
         <SunClawIcon size={24} />
       </div>
-      <div className="sc-funnel-bot-bubble">{children}</div>
-    </div>
-  );
-
-  const UserMessage = ({ children }: { children: React.ReactNode }) => (
-    <div
-      className="sc-funnel-user-row"
-      style={{ animation: "scFunnelFadeUp 0.3s ease forwards" }}
-    >
-      <div className="sc-funnel-user-bubble">{children}</div>
+      <div className={`sc-funnel-bot-bubble ${isComplete ? "sc-funnel-complete-bubble" : ""}`}>
+        {children}
+      </div>
     </div>
   );
 
   const ChoiceCard = ({
+    id,
     icon,
     label,
     descriptor,
     onClick,
-    delay = 0,
+    delay: delayMs = 0,
   }: {
+    id: string;
     icon: string;
     label: string;
     descriptor?: string | null;
@@ -192,9 +262,9 @@ export default function ConversationalFunnel() {
   }) => (
     <button
       type="button"
-      className="sc-funnel-choice"
+      className={`sc-funnel-choice ${selectedCard === id ? "selected" : ""}`}
       onClick={onClick}
-      style={{ animationDelay: `${delay}ms` }}
+      style={{ animationDelay: `${delayMs}ms` }}
     >
       <div className="sc-funnel-choice-icon">{icon}</div>
       <div>
@@ -207,11 +277,13 @@ export default function ConversationalFunnel() {
   );
 
   const RegionCard = ({
+    id,
     icon,
     label,
     onClick,
-    delay = 0,
+    delay: delayMs = 0,
   }: {
+    id: string;
     icon: string;
     label: string;
     onClick: () => void;
@@ -219,9 +291,9 @@ export default function ConversationalFunnel() {
   }) => (
     <button
       type="button"
-      className="sc-funnel-region"
+      className={`sc-funnel-region ${selectedCard === id ? "selected" : ""}`}
       onClick={onClick}
-      style={{ animationDelay: `${delay}ms` }}
+      style={{ animationDelay: `${delayMs}ms` }}
     >
       <span className="sc-funnel-region-icon">{icon}</span>
       <span className="sc-funnel-region-label">{label}</span>
@@ -234,10 +306,11 @@ export default function ConversationalFunnel() {
       <BotMessage animate={false}>What can I help you with?</BotMessage>
 
       {step === "role" && (
-        <div className="sc-funnel-choices">
+        <div className={`sc-funnel-choices ${stepEntering ? "sc-funnel-step-enter" : ""}`}>
           {ROLE_OPTIONS.map((opt, i) => (
             <ChoiceCard
               key={opt.id}
+              id={opt.id}
               icon={opt.icon}
               label={opt.label}
               descriptor={opt.descriptor}
@@ -248,21 +321,28 @@ export default function ConversationalFunnel() {
         </div>
       )}
 
-      {/* Show user's role selection */}
-      {role && step !== "role" && (
-        <UserMessage>
-          {ROLE_OPTIONS.find((o) => o.id === role)?.label}
-        </UserMessage>
-      )}
+      {/* User bubbles */}
+      {userBubbles.map((bubble) => (
+        <div
+          key={bubble.key}
+          className={`sc-funnel-user-row ${bubble.entering ? "entering" : ""}`}
+        >
+          <div className="sc-funnel-user-bubble">{bubble.text}</div>
+        </div>
+      ))}
 
-      {/* Step 2: Region (skipped for "curious") */}
-      {step === "region" && (
+      {/* Typing indicator */}
+      {showTyping && <TypingIndicator />}
+
+      {/* Step 2: Region */}
+      {step === "region" && !showTyping && (
         <>
-          <BotMessage>Where are you based?</BotMessage>
-          <div className="sc-funnel-regions">
+          <BotMessage>Where in the world are you?</BotMessage>
+          <div className={`sc-funnel-regions ${stepEntering ? "sc-funnel-step-enter" : ""}`}>
             {REGION_OPTIONS.map((r, i) => (
               <RegionCard
                 key={r.id}
+                id={r.id}
                 icon="🌍"
                 label={r.label}
                 onClick={() => handleRegionSelect(r.id)}
@@ -273,22 +353,15 @@ export default function ConversationalFunnel() {
         </>
       )}
 
-      {/* Show user's region selection */}
-      {region && (step === "form" || step === "complete") && (
-        <UserMessage>
-          {REGION_OPTIONS.find((r) => r.id === region)?.label}
-        </UserMessage>
-      )}
-
       {/* Step 3: Form */}
-      {step === "form" && (
+      {step === "form" && !showTyping && (
         <>
           <BotMessage>
             {isCuriousFastPath
-              ? "No problem. Drop your name and email and I'll send you straight to SunClaw."
-              : "Almost there. Let me know how to reach you."}
+              ? "Say less. Name and email, and I'll show you everything."
+              : "Almost there. Drop your details and I'll take it from here."}
           </BotMessage>
-          <form className="sc-funnel-form" onSubmit={handleFormSubmit}>
+          <form className={`sc-funnel-form ${stepEntering ? "sc-funnel-step-enter" : ""}`} onSubmit={handleFormSubmit}>
             <input
               type="text"
               placeholder="Full Name"
@@ -308,7 +381,6 @@ export default function ConversationalFunnel() {
               }
               className="sc-funnel-input"
             />
-            {/* Only show phone and company for non-curious users */}
             {!isCuriousFastPath && (
               <>
                 <input
@@ -343,26 +415,26 @@ export default function ConversationalFunnel() {
       )}
 
       {/* Step 4: Completion */}
-      {step === "complete" && (
+      {step === "complete" && !showTyping && (
         <>
-          <BotMessage>
-            SunClaw is ready to talk. Message the bot to start your
-            conversation.
+          <BotMessage isComplete>
+            You're in. Let's get our claws into this. 🦞
           </BotMessage>
-          <div className="sc-funnel-cta-row">
+          <div className={`sc-funnel-cta-row ${stepEntering ? "sc-funnel-step-enter" : ""}`} style={{ animationDelay: "200ms" }}>
             <a
               href={telegramLink || "https://t.me/sunclaw_KIISHA_bot"}
               target="_blank"
               rel="noopener noreferrer"
-              className="sc-funnel-submit"
+              className="sc-funnel-telegram-cta"
             >
-              Open Telegram
+              <span>Message SunClaw on Telegram</span>
+              <span className="sc-funnel-telegram-arrow">→</span>
             </a>
           </div>
-          <p className="sc-funnel-note">
-            Want to deploy your own agent instead?{" "}
-            <a href="/agent/setup" className="sc-funnel-link">
-              Launch the setup wizard →
+          <p className={`sc-funnel-note ${stepEntering ? "sc-funnel-step-enter" : ""}`} style={{ animationDelay: "400ms" }}>
+            Want to deploy your own agent?{" "}
+            <a href="#deploy" className="sc-funnel-link">
+              Set up an OpenClaw instance →
             </a>
           </p>
         </>

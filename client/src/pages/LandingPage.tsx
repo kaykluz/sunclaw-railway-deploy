@@ -107,9 +107,9 @@ const FeatureIconFinancial = () => (
     <circle cx="27" cy="40" r="1" fill="#FFF"/>
     <circle cx="39" cy="40" r="1" fill="#FFF"/>
     <path d="M27 49 Q32 53 37 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <rect x="56" y="50" width="7" height="18" rx="2" fill="#E8664A" opacity="0.7"/>
-    <rect x="65" y="38" width="7" height="30" rx="2" fill="#F5A623" opacity="0.9"/>
-    <rect x="56" y="48" width="7" height="20" rx="2" fill="#E8664A" opacity="0.6"/>
+    <rect className="sc-bar" x="56" y="50" width="7" height="18" rx="2" fill="#E8664A" opacity="0.7" style={{ transformOrigin: "59.5px 68px" }}/>
+    <rect className="sc-bar" x="65" y="38" width="7" height="30" rx="2" fill="#F5A623" opacity="0.9" style={{ transformOrigin: "68.5px 68px" }}/>
+    <rect className="sc-bar" x="56" y="48" width="7" height="20" rx="2" fill="#E8664A" opacity="0.6" style={{ transformOrigin: "59.5px 68px" }}/>
     <line x1="53" y1="68" x2="76" y2="68" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>
   </svg>
 );
@@ -128,8 +128,8 @@ const FeatureIconTracker = () => (
     <path d="M35 49 Q40 53 45 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
     <rect x="10" y="36" width="16" height="22" rx="3" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.6"/>
     <rect x="14" y="33" width="8" height="5" rx="2" fill="#E8664A" opacity="0.5"/>
-    <path d="M13 43 L15 45 L19 40" stroke="#F5A623" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-    <path d="M13 50 L15 52 L19 47" stroke="#F5A623" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    <path className="sc-check" d="M13 43 L15 45 L19 40" stroke="#F5A623" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    <path className="sc-check" d="M13 50 L15 52 L19 47" stroke="#F5A623" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
     <line x1="21" y1="42" x2="24" y2="42" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
     <line x1="21" y1="49" x2="24" y2="49" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
   </svg>
@@ -147,9 +147,11 @@ const FeatureIconDiagnostics = () => (
     <circle cx="31" cy="40" r="1" fill="#FFF"/>
     <circle cx="43" cy="40" r="1" fill="#FFF"/>
     <path d="M31 49 Q36 53 41 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <line x1="58" y1="30" x2="68" y2="50" stroke="#E8664A" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
-    <circle cx="70" cy="54" r="6" stroke="#E8664A" strokeWidth="2.5" fill="none" opacity="0.7"/>
-    <line x1="73" y1="48" x2="76" y2="45" stroke="#E8664A" strokeWidth="2.5" strokeLinecap="round" opacity="0.7"/>
+    <g className="sc-magnify">
+      <line x1="58" y1="30" x2="68" y2="50" stroke="#E8664A" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
+      <circle cx="70" cy="54" r="6" stroke="#E8664A" strokeWidth="2.5" fill="none" opacity="0.7"/>
+      <line x1="73" y1="48" x2="76" y2="45" stroke="#E8664A" strokeWidth="2.5" strokeLinecap="round" opacity="0.7"/>
+    </g>
   </svg>
 );
 
@@ -186,10 +188,12 @@ const FeatureIconKnowledge = () => (
     <circle cx="34.5" cy="43" r="1" fill="#FFF"/>
     <circle cx="46.5" cy="43" r="1" fill="#FFF"/>
     <path d="M35 53 Q40 57 45 53" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <circle cx="40" cy="10" r="8" stroke="#E8664A" strokeWidth="2" fill="none" opacity="0.7"/>
-    <line x1="37" y1="18" x2="37" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
-    <line x1="43" y1="18" x2="43" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
-    <line x1="36" y1="22" x2="44" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+    <g className="sc-bulb">
+      <circle cx="40" cy="10" r="8" stroke="#E8664A" strokeWidth="2" fill="none" opacity="0.7"/>
+      <line x1="37" y1="18" x2="37" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+      <line x1="43" y1="18" x2="43" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+      <line x1="36" y1="22" x2="44" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+    </g>
     <line x1="40" y1="0" x2="40" y2="3" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>
     <line x1="30" y1="6" x2="28" y2="4" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" opacity="0.3"/>
     <line x1="50" y1="6" x2="52" y2="4" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" opacity="0.3"/>
@@ -210,9 +214,9 @@ const FeatureIconCommunication = () => (
     <ellipse cx="32" cy="51" rx="4" ry="3" fill="#1A1612"/>
     <rect x="52" y="32" width="24" height="18" rx="8" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.6"/>
     <path d="M56 50 L52 56 L60 50" stroke="#E8664A" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.6"/>
-    <circle cx="59" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
-    <circle cx="64" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
-    <circle cx="69" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
+    <circle className="sc-speech-dot" cx="59" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
+    <circle className="sc-speech-dot" cx="64" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
+    <circle className="sc-speech-dot" cx="69" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
   </svg>
 );
 
@@ -228,12 +232,18 @@ const FeatureIconMultilingual = () => (
     <circle cx="35" cy="40" r="1" fill="#FFF"/>
     <circle cx="47" cy="40" r="1" fill="#FFF"/>
     <path d="M35 49 Q40 53 45 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <rect x="2" y="36" width="18" height="14" rx="6" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.5"/>
-    <text x="7" y="46" fontFamily="DM Sans" fontSize="8" fill="#E8664A" opacity="0.6">Fr</text>
-    <rect x="60" y="32" width="18" height="14" rx="6" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.5"/>
-    <text x="64" y="42" fontFamily="DM Sans" fontSize="8" fill="#E8664A" opacity="0.6">Yo</text>
-    <rect x="30" y="4" width="20" height="14" rx="6" stroke="#F5A623" strokeWidth="1.5" fill="none" opacity="0.4"/>
-    <text x="36" y="14" fontFamily="DM Sans" fontSize="8" fill="#F5A623" opacity="0.5">En</text>
+    <g className="sc-lang-tag">
+      <rect x="2" y="36" width="18" height="14" rx="6" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.5"/>
+      <text x="7" y="46" fontFamily="DM Sans" fontSize="8" fill="#E8664A" opacity="0.6">Fr</text>
+    </g>
+    <g className="sc-lang-tag">
+      <rect x="60" y="32" width="18" height="14" rx="6" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.5"/>
+      <text x="64" y="42" fontFamily="DM Sans" fontSize="8" fill="#E8664A" opacity="0.6">Yo</text>
+    </g>
+    <g className="sc-lang-tag">
+      <rect x="30" y="4" width="20" height="14" rx="6" stroke="#F5A623" strokeWidth="1.5" fill="none" opacity="0.4"/>
+      <text x="36" y="14" fontFamily="DM Sans" fontSize="8" fill="#F5A623" opacity="0.5">En</text>
+    </g>
   </svg>
 );
 
@@ -249,7 +259,7 @@ const FeatureIconEV = () => (
     <circle cx="35" cy="42" r="1" fill="#FFF"/>
     <circle cx="47" cy="42" r="1" fill="#FFF"/>
     <path d="M35 51 Q40 55 45 51" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <path d="M44 4 L36 20 L44 20 L34 38 L48 16 L40 16 Z" fill="#E8664A" opacity="0.75"/>
+    <path className="sc-bolt" d="M44 4 L36 20 L44 20 L34 38 L48 16 L40 16 Z" fill="#E8664A" opacity="0.75"/>
     <circle cx="30" cy="8" r="1.5" fill="#F5A623" opacity="0.4"/>
     <circle cx="52" cy="12" r="1" fill="#F5A623" opacity="0.3"/>
   </svg>
@@ -267,7 +277,7 @@ const FeatureIconData = () => (
     <circle cx="27" cy="36" r="1" fill="#FFF"/>
     <circle cx="39" cy="36" r="1" fill="#FFF"/>
     <path d="M27 45 Q32 49 37 45" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <path d="M50 68 L56 58 L62 62 L68 48 L74 36 L78 28" stroke="#E8664A" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.7"/>
+    <path className="sc-chart-line" d="M50 68 L56 58 L62 62 L68 48 L74 36 L78 28" stroke="#E8664A" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.7" style={{ strokeDasharray: 50, strokeDashoffset: 0 }}/>
     <path d="M76 24 L78 28 L74 30" stroke="#E8664A" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.7"/>
     <line x1="48" y1="68" x2="80" y2="68" stroke="#E8664A" strokeWidth="1" opacity="0.2"/>
     <line x1="48" y1="68" x2="48" y2="24" stroke="#E8664A" strokeWidth="1" opacity="0.2"/>
@@ -294,10 +304,10 @@ const FeatureIconCommunity = () => (
     <circle cx="51.5" cy="42" r="0.8" fill="#FFF"/>
     <circle cx="61.5" cy="42" r="0.8" fill="#FFF"/>
     <path d="M52 50 Q56 53 60 50" stroke="#1A1612" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-    <circle cx="41" cy="38" r="2" fill="#E8664A" opacity="0.5"/>
-    <circle cx="41" cy="32" r="1.2" fill="#F5A623" opacity="0.4"/>
-    <circle cx="38" cy="35" r="1" fill="#E8664A" opacity="0.3"/>
-    <circle cx="44" cy="35" r="1" fill="#E8664A" opacity="0.3"/>
+    <circle className="sc-connection-dot" cx="41" cy="38" r="2" fill="#E8664A" opacity="0.5"/>
+    <circle className="sc-connection-dot" cx="41" cy="32" r="1.2" fill="#F5A623" opacity="0.4"/>
+    <circle className="sc-connection-dot" cx="38" cy="35" r="1" fill="#E8664A" opacity="0.3"/>
+    <circle className="sc-connection-dot" cx="44" cy="35" r="1" fill="#E8664A" opacity="0.3"/>
   </svg>
 );
 
@@ -313,7 +323,7 @@ const FeatureIconSecurity = () => (
     <circle cx="35" cy="34" r="1" fill="#FFF"/>
     <circle cx="47" cy="34" r="1" fill="#FFF"/>
     <path d="M40 42 L26 48 L26 58 C26 68, 40 76, 40 76 C40 76, 54 68, 54 58 L54 48 Z" fill="#1A1612" stroke="#E8664A" strokeWidth="1.5" opacity="0.85"/>
-    <path d="M34 58 L38 63 L48 52" stroke="#F5A623" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    <path className="sc-shield-check" d="M34 58 L38 63 L48 52" stroke="#F5A623" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
@@ -427,15 +437,16 @@ const landingCSS = `
 }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-/* DEVELOPER STRIP */
+/* DEVELOPER STRIP - Coral accent, rectangular */
 .sc-landing .dev-strip {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 12px 24px;
-  border-radius: 100px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  background: rgba(232,102,74,0.06);
+  border: 1px solid rgba(232,102,74,0.15);
+  border-left: 3px solid #E8664A;
   text-decoration: none;
   transition: all 0.3s;
   margin-top: 48px;
@@ -447,8 +458,8 @@ const landingCSS = `
 }
 
 .sc-landing .dev-strip:hover {
-  border-color: rgba(245,166,35,0.2);
-  background: rgba(255,255,255,0.05);
+  border-color: rgba(232,102,74,0.3);
+  background: rgba(232,102,74,0.1);
   transform: translateY(-1px);
 }
 
@@ -459,7 +470,7 @@ const landingCSS = `
 .sc-landing .dev-strip-text {
   font-family: 'Space Mono', monospace;
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--lobster-coral);
   letter-spacing: 0.5px;
 }
 
@@ -468,7 +479,7 @@ const landingCSS = `
 }
 
 .sc-landing .dev-strip-arrow {
-  color: #F5A623;
+  color: #E8664A;
   font-size: 14px;
   transition: transform 0.3s;
 }
@@ -561,6 +572,40 @@ const landingCSS = `
 .sc-landing .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
 .sc-landing .feature-tag { display: inline-block; padding: 4px 12px; border-radius: 100px; background: rgba(245,166,35,0.1); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--sun-gold); margin-bottom: 12px; }
 
+/* Per-feature ambient animations */
+.sc-landing .feature-card[data-feature="financial"] .sc-bar { animation: scBarGrow 2s ease-in-out infinite; }
+@keyframes scBarGrow { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.08); } }
+
+.sc-landing .feature-card[data-feature="tracker"]:hover .sc-check { animation: scCheckPop 0.4s ease forwards; }
+@keyframes scCheckPop { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
+.sc-landing .feature-card[data-feature="diagnostics"]:hover .sc-magnify { animation: scMagnifyPulse 0.8s ease infinite; }
+@keyframes scMagnifyPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+.sc-landing .feature-card[data-feature="document"]:hover .sc-doc-line { animation: scDocLineSlide 0.6s ease forwards; }
+@keyframes scDocLineSlide { 0% { opacity: 0.4; } 100% { opacity: 0.8; } }
+
+.sc-landing .feature-card[data-feature="knowledge"]:hover .sc-bulb { animation: scBulbGlow 0.8s ease infinite; }
+@keyframes scBulbGlow { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+.sc-landing .feature-card[data-feature="communication"]:hover .sc-speech-dot { animation: scSpeechDotPulse 0.5s ease infinite; }
+@keyframes scSpeechDotPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+.sc-landing .feature-card[data-feature="multilingual"]:hover .sc-lang-tag { animation: scLangTagFloat 1s ease infinite; }
+@keyframes scLangTagFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+
+.sc-landing .feature-card[data-feature="ev"]:hover .sc-bolt { animation: scBoltFlash 0.6s ease infinite; }
+@keyframes scBoltFlash { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
+
+.sc-landing .feature-card[data-feature="data"]:hover .sc-chart-line { animation: scChartDraw 1s ease forwards; }
+@keyframes scChartDraw { 0% { stroke-dashoffset: 50; } 100% { stroke-dashoffset: 0; } }
+
+.sc-landing .feature-card[data-feature="community"]:hover .sc-connection-dot { animation: scConnectionPulse 0.8s ease infinite; }
+@keyframes scConnectionPulse { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.3); opacity: 1; } }
+
+.sc-landing .feature-card[data-feature="security"]:hover .sc-shield-check { animation: scShieldGlow 0.6s ease forwards; }
+@keyframes scShieldGlow { 0% { opacity: 1; } 100% { opacity: 1; filter: drop-shadow(0 0 4px rgba(245,166,35,0.6)); } }
+
 /* CHAT PREVIEW */
 .sc-landing .chat-preview { max-width: 420px; flex-shrink: 0; }
 .sc-landing .chat-bubble { padding: 14px 18px; border-radius: 18px; font-size: 14px; line-height: 1.6; margin-bottom: 12px; max-width: 320px; }
@@ -623,7 +668,7 @@ const landingCSS = `
 
 /* CONVERSATIONAL FUNNEL */
 .sc-landing .sc-funnel {
-  max-width: 680px;
+  max-width: 780px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -654,12 +699,28 @@ const landingCSS = `
   font-size: 15px;
   line-height: 1.6;
   color: var(--text-secondary);
-  max-width: 480px;
+  max-width: 520px;
+}
+
+/* Celebratory completion bubble */
+.sc-landing .sc-funnel-complete-bubble {
+  background: linear-gradient(135deg, rgba(245,166,35,0.12), rgba(232,102,74,0.08));
+  border: 1px solid rgba(245,166,35,0.2);
+  color: var(--text-primary);
 }
 
 .sc-landing .sc-funnel-user-row {
   display: flex;
   justify-content: flex-end;
+}
+
+.sc-landing .sc-funnel-user-row.entering {
+  animation: scFunnelUserSlide 0.3s ease forwards;
+}
+
+@keyframes scFunnelUserSlide {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .sc-landing .sc-funnel-user-bubble {
@@ -670,7 +731,40 @@ const landingCSS = `
   font-size: 14px;
   line-height: 1.5;
   color: var(--text-primary);
-  max-width: 400px;
+  max-width: 440px;
+}
+
+/* Typing indicator */
+.sc-landing .sc-funnel-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 18px;
+  border-bottom-left-radius: 6px;
+}
+
+.sc-landing .sc-funnel-typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: scTypingBounce 1.4s ease-in-out infinite;
+}
+
+.sc-landing .sc-funnel-typing-dot:nth-child(1) { animation-delay: 0s; }
+.sc-landing .sc-funnel-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.sc-landing .sc-funnel-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes scTypingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Step enter animation */
+.sc-landing .sc-funnel-step-enter {
+  animation: scFunnelFadeUp 0.3s ease forwards;
 }
 
 .sc-landing .sc-funnel-choices {
@@ -689,7 +783,7 @@ const landingCSS = `
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   text-align: left;
   opacity: 0;
   animation: scFunnelFadeUp 0.3s ease forwards;
@@ -699,6 +793,12 @@ const landingCSS = `
   border-color: rgba(245,166,35,0.2);
   background: rgba(255,255,255,0.04);
   transform: translateY(-2px);
+}
+
+.sc-landing .sc-funnel-choice.selected {
+  border-color: var(--sun-gold);
+  background: rgba(245,166,35,0.15);
+  transform: scale(0.98);
 }
 
 .sc-landing .sc-funnel-choice-icon {
@@ -739,7 +839,7 @@ const landingCSS = `
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   text-align: left;
   opacity: 0;
   animation: scFunnelFadeUp 0.3s ease forwards;
@@ -749,6 +849,12 @@ const landingCSS = `
   border-color: rgba(245,166,35,0.2);
   background: rgba(255,255,255,0.04);
   transform: translateY(-2px);
+}
+
+.sc-landing .sc-funnel-region.selected {
+  border-color: var(--sun-gold);
+  background: rgba(245,166,35,0.15);
+  transform: scale(0.98);
 }
 
 .sc-landing .sc-funnel-region-icon {
@@ -767,7 +873,6 @@ const landingCSS = `
   gap: 12px;
   margin-left: 36px;
   max-width: 400px;
-  animation: scFunnelFadeUp 0.3s ease forwards;
 }
 
 .sc-landing .sc-funnel-input {
@@ -780,15 +885,23 @@ const landingCSS = `
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
+  opacity: 0;
+  animation: scFunnelFadeUp 0.3s ease forwards;
 }
+
+.sc-landing .sc-funnel-input:nth-child(1) { animation-delay: 0ms; }
+.sc-landing .sc-funnel-input:nth-child(2) { animation-delay: 50ms; }
+.sc-landing .sc-funnel-input:nth-child(3) { animation-delay: 100ms; }
+.sc-landing .sc-funnel-input:nth-child(4) { animation-delay: 150ms; }
 
 .sc-landing .sc-funnel-input::placeholder {
   color: var(--text-muted);
 }
 
 .sc-landing .sc-funnel-input:focus {
-  border-color: rgba(245,166,35,0.4);
+  border-color: rgba(245,166,35,0.5);
+  box-shadow: 0 0 0 3px rgba(245,166,35,0.1);
 }
 
 .sc-landing .sc-funnel-submit {
@@ -806,6 +919,8 @@ const landingCSS = `
   cursor: pointer;
   transition: all 0.3s;
   text-decoration: none;
+  opacity: 0;
+  animation: scFunnelFadeUp 0.3s ease forwards 200ms;
 }
 
 .sc-landing .sc-funnel-submit:hover {
@@ -815,9 +930,46 @@ const landingCSS = `
 }
 
 .sc-landing .sc-funnel-submit:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none;
+  animation: scDisabledPulse 2s ease-in-out infinite;
+}
+
+@keyframes scDisabledPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.4; }
+}
+
+/* Telegram CTA */
+.sc-landing .sc-funnel-telegram-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--sun-gold), #FFB840);
+  color: var(--deep-earth);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(245,166,35,0.3);
+}
+
+.sc-landing .sc-funnel-telegram-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(245,166,35,0.4);
+}
+
+.sc-landing .sc-funnel-telegram-arrow {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.sc-landing .sc-funnel-telegram-cta:hover .sc-funnel-telegram-arrow {
+  transform: translateX(4px);
 }
 
 .sc-landing .sc-funnel-cta-row {
@@ -854,8 +1006,9 @@ const landingCSS = `
   .sc-landing .sc-funnel-form { margin-left: 0; max-width: 100%; }
   .sc-landing .sc-funnel-cta-row { margin-left: 0; }
   .sc-landing .sc-funnel-note { margin-left: 0; }
-  .sc-landing .sc-funnel-bot-bubble { max-width: 280px; }
-  .sc-landing .sc-funnel-user-bubble { max-width: 260px; }
+  .sc-landing .sc-funnel-bot-bubble { max-width: 300px; }
+  .sc-landing .sc-funnel-user-bubble { max-width: 280px; }
+  .sc-landing .sc-funnel-telegram-cta { width: 100%; justify-content: center; }
 }
 `;
 
@@ -919,7 +1072,7 @@ export default function LandingPage() {
 
         <a href="#deploy" className="dev-strip">
           <span className="dev-strip-icon">🤖</span>
-          <span className="dev-strip-text">Developers: deploy your own RE-native agent</span>
+          <span className="dev-strip-text">Developers: deploy your own OpenClaw instance</span>
           <span className="dev-strip-arrow">→</span>
         </a>
 
@@ -1011,8 +1164,23 @@ export default function LandingPage() {
 
           {features.map((f, i) => {
             const IconComponent = featureIcons[f.title];
+            // Map feature titles to data-feature attributes
+            const dataFeatureMap: Record<string, string> = {
+              "Financial Modeling": "financial",
+              "Project Development Tracker": "tracker",
+              "Field Diagnostics": "diagnostics",
+              "Document Engine": "document",
+              "Knowledge Hub": "knowledge",
+              "Communication & Productivity": "communication",
+              "Multilingual Support": "multilingual",
+              "EV & Emerging Tech": "ev",
+              "Data & Analytics": "data",
+              "Community & Network Effects": "community",
+              "Security, Privacy & Trust": "security",
+            };
+            const dataFeature = dataFeatureMap[f.title] || "";
             return (
-              <div className="feature-card" key={i}>
+              <div className="feature-card" key={i} data-feature={dataFeature}>
                 <div className="feature-icon-wrap">
                   <div className="feature-icon">
                     {IconComponent ? <IconComponent /> : null}
