@@ -1,19 +1,35 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import LandingNavbar from "@/components/LandingNavbar";
 import LandingFooter from "@/components/LandingFooter";
 import { SunClawFullIcon } from "@/components/SunClawLogo";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function Marketplace() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const joinMutation = trpc.waitlist.join.useMutation({
+    onSuccess: (data) => {
+      setSubmitted(true);
+      if (data.alreadyExists) {
+        toast.info("You're already on the waitlist! We'll be in touch.");
+      } else {
+        toast.success("Welcome to the reef! We'll notify you when the marketplace opens.");
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message || "Something went wrong. Please try again.");
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: connect to backend waitlist endpoint
-    setSubmitted(true);
+    if (!email) return;
+    joinMutation.mutate({ email, role: role || undefined, source: "marketplace" });
   };
 
   return (
@@ -92,10 +108,17 @@ export default function Marketplace() {
               </select>
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#F5A623] text-[#1A1612] font-display font-bold text-sm hover:bg-[#FFB840] transition-all"
+                disabled={joinMutation.isPending || !email}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#F5A623] text-[#1A1612] font-display font-bold text-sm hover:bg-[#FFB840] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Join the Waitlist
-                <ArrowRight className="w-4 h-4" />
+                {joinMutation.isPending ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <>
+                    Join the Waitlist
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </form>
           ) : (
