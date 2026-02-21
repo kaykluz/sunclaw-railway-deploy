@@ -520,23 +520,33 @@ export const appRouter = router({
           company: z.string().max(255).optional(),
           role: z.string().max(128).optional(),
           source: z.string().max(64).optional(),
+          phone: z.string().max(32).optional(),
+          intent: z.string().max(32).optional(),
+          region: z.string().max(64).optional(),
         })
       )
       .mutation(async ({ input }) => {
+        // Generate unique deep-link reference for Telegram
+        const deepLink = `ref_${crypto.randomBytes(6).toString("hex")}`;
+
         const result = await addToWaitlist({
           email: input.email,
           name: input.name ?? null,
           company: input.company ?? null,
           role: input.role ?? null,
           source: input.source ?? "website",
+          phone: input.phone ?? null,
+          intent: input.intent ?? null,
+          region: input.region ?? null,
+          telegramDeepLink: deepLink,
         });
 
         notifyOwner({
-          title: "New Waitlist Signup",
-          content: `${input.email}${input.name ? ` (${input.name})` : ""}${input.company ? ` from ${input.company}` : ""} just joined the SunClaw waitlist.`,
+          title: "New Lead",
+          content: `${input.email}${input.name ? ` (${input.name})` : ""}${input.company ? ` from ${input.company}` : ""} — intent: ${input.intent ?? "unknown"}, region: ${input.region ?? "unknown"}`,
         }).catch(() => {});
 
-        return result;
+        return { ...result, telegramDeepLink: deepLink };
       }),
 
     count: publicProcedure.query(async () => {
