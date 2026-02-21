@@ -58,7 +58,7 @@ function HeroLogo() {
 
 function CtaLogo() {
   return (
-    <svg viewBox="0 0 120 120" fill="none" width="72" height="72" style={{ marginBottom: 24 }}>
+    <svg viewBox="0 0 120 120" fill="none" width="72" height="72" style={{ display: "block", margin: "0 auto 24px" }}>
       <circle cx="60" cy="54" r="26" fill="#F5A623"/>
       <path d="M44 26 C42 18, 38 13, 33 12 C28 11, 26 15, 28 19 C30 23, 34 26, 38 28" stroke="#E8664A" strokeWidth="4" fill="none" strokeLinecap="round"/>
       <circle cx="33" cy="11" r="3" fill="#E8664A"/>
