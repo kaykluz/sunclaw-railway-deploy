@@ -5,6 +5,7 @@
 */
 
 import { useEffect } from "react";
+import ConversationalFunnel from "@/components/ConversationalFunnel";
 
 // The SVG inline components match the HTML file exactly
 function NavLogo() {
@@ -479,6 +480,15 @@ export default function LandingPage() {
     return () => { style.remove(); };
   }, []);
 
+  useEffect(() => {
+    // Smooth scroll to #talk if hash is present
+    if (window.location.hash === "#talk") {
+      setTimeout(() => {
+        document.getElementById("talk")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, []);
+
   return (
     <div className="sc-landing">
       {/* NAV */}
@@ -492,7 +502,7 @@ export default function LandingPage() {
           <li><a href="/marketplace">Marketplace</a></li>
           <li><a href="/agent">For Developers</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="/marketplace" className="nav-cta">Get Early Access</a></li>
+          <li><a href="#talk" className="nav-cta">Talk to SunClaw</a></li>
         </ul>
       </nav>
 
@@ -502,9 +512,8 @@ export default function LandingPage() {
         <div className="hero-logo"><HeroLogo /></div>
         <h1>The <span className="gold">energy conversation</span> the world's been waiting for.</h1>
         <p className="hero-sub">SunClaw is your AI-powered advisor for renewable energy. Whether you're developing a project or providing the services to build one, SunClaw matches you to the right people through conversation.</p>
-        <div className="hero-ctas">
-          <a href="/marketplace" className="btn-primary">Get Early Access</a>
-          <a href="/agent/setup" className="btn-secondary">Deploy Your Own Agent</a>
+        <div id="talk" className="hero-ctas" style={{ width: '100%', maxWidth: 560 }}>
+          <ConversationalFunnel />
         </div>
       </section>
 
@@ -683,7 +692,7 @@ export default function LandingPage() {
           <CtaLogo />
           <h2>Clean energy starts<br/>with a <span style={{ color: "var(--sun-gold)" }}>message</span>.</h2>
           <p>Whether you're building projects or providing the services to build them, join the waitlist for the conversational operating system for renewable energy.</p>
-          <a href="/marketplace" className="btn-primary" style={{ display: "inline-block" }}>Get Early Access</a>
+          <a href="#talk" className="btn-primary" style={{ display: "inline-block" }}>Talk to SunClaw</a>
           <a href="/agent/setup" className="btn-secondary" style={{ display: "inline-block", marginLeft: 12 }}>Deploy Your Own Agent</a>
         </div>
       </section>
