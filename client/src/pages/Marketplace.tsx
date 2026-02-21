@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { trpc } from "@/lib/trpc";
 
 // SunClaw mini icon for nav
 const SunClawIcon = ({ size = 32 }: { size?: number }) => (
@@ -1014,17 +1015,24 @@ export default function Marketplace() {
   // Waitlist form state
   const [email, setEmail] = useState("");
   const [side, setSide] = useState("seeking");
-  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   // Bottom CTA form state (separate)
   const [ctaEmail, setCtaEmail] = useState("");
   const [ctaSide, setCtaSide] = useState("seeking");
-  const [ctaSubmitting, setCtaSubmitting] = useState(false);
   const [ctaSubmitted, setCtaSubmitted] = useState(false);
 
   // Intersection Observer for vertical cards
   const verticalsRef = useRef<HTMLDivElement>(null);
+
+  // tRPC mutations for waitlist
+  const heroMutation = trpc.waitlist.join.useMutation({
+    onSuccess: () => setSubmitted(true),
+  });
+
+  const ctaMutation = trpc.waitlist.join.useMutation({
+    onSuccess: () => setCtaSubmitted(true),
+  });
 
   useEffect(() => {
     // Inject CSS
@@ -1063,35 +1071,24 @@ export default function Marketplace() {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent, isBottomCta = false) => {
+  const handleHeroSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const currentEmail = isBottomCta ? ctaEmail : email;
-    const currentSide = isBottomCta ? ctaSide : side;
-    const setCurrentSubmitting = isBottomCta ? setCtaSubmitting : setSubmitting;
-    const setCurrentSubmitted = isBottomCta ? setCtaSubmitted : setSubmitted;
+    if (!email) return;
+    heroMutation.mutate({
+      email,
+      source: "marketplace",
+      intent: side,
+    });
+  };
 
-    if (!currentEmail) return;
-
-    setCurrentSubmitting(true);
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: currentEmail,
-          source: "marketplace",
-          intent: currentSide,
-        }),
-      });
-
-      if (response.ok) {
-        setCurrentSubmitted(true);
-      }
-    } catch {
-      // Silent fail - could add error handling
-    } finally {
-      setCurrentSubmitting(false);
-    }
+  const handleCtaSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!ctaEmail) return;
+    ctaMutation.mutate({
+      email: ctaEmail,
+      source: "marketplace",
+      intent: ctaSide,
+    });
   };
 
   return (
@@ -1127,7 +1124,7 @@ export default function Marketplace() {
             <span>✓</span> You're on the list. We'll be in touch.
           </div>
         ) : (
-          <form className="mp-waitlist-form" onSubmit={(e) => handleSubmit(e, false)}>
+          <form className="mp-waitlist-form" onSubmit={handleHeroSubmit}>
             <input
               type="email"
               placeholder="your@email.com"
@@ -1149,10 +1146,10 @@ export default function Marketplace() {
             </select>
             <button
               type="submit"
-              disabled={submitting || !email}
+              disabled={heroMutation.isPending || !email}
               className="mp-waitlist-submit"
             >
-              {submitting ? "Joining..." : "Join Waitlist"}
+              {heroMutation.isPending ? "Joining..." : "Join Waitlist"}
             </button>
           </form>
         )}
@@ -1283,7 +1280,7 @@ export default function Marketplace() {
             <span>✓</span> You're on the list. We'll be in touch.
           </div>
         ) : (
-          <form className="mp-waitlist-form" onSubmit={(e) => handleSubmit(e, true)}>
+          <form className="mp-waitlist-form" onSubmit={handleCtaSubmit}>
             <input
               type="email"
               placeholder="your@email.com"
@@ -1305,10 +1302,10 @@ export default function Marketplace() {
             </select>
             <button
               type="submit"
-              disabled={ctaSubmitting || !ctaEmail}
+              disabled={ctaMutation.isPending || !ctaEmail}
               className="mp-waitlist-submit"
             >
-              {ctaSubmitting ? "Joining..." : "Join Waitlist"}
+              {ctaMutation.isPending ? "Joining..." : "Join Waitlist"}
             </button>
           </form>
         )}
