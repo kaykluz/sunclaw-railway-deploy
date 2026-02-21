@@ -529,19 +529,19 @@ export const appRouter = router({
         // Generate unique deep-link reference for Telegram
         const deepLink = `ref_${crypto.randomBytes(6).toString("hex")}`;
 
-        // Convert empty strings to null explicitly for nullable fields
-        const toNull = (v: string | undefined | null): string | null =>
-          (v && v.trim().length > 0) ? v.trim() : null;
+        // Convert empty strings to undefined so Drizzle omits them from insert (database uses NULL)
+        const clean = (v: string | undefined | null): string | undefined =>
+          (v && v.trim().length > 0) ? v.trim() : undefined;
 
         const result = await addToWaitlist({
           email: input.email.trim(),
-          name: toNull(input.name),
-          company: toNull(input.company),
-          role: toNull(input.role),
+          name: clean(input.name),
+          company: clean(input.company),
+          role: clean(input.role),
           source: input.source || "website",
-          phone: toNull(input.phone),
-          intent: toNull(input.intent),
-          region: toNull(input.region),
+          phone: clean(input.phone),
+          intent: clean(input.intent),
+          region: clean(input.region),
           telegramDeepLink: deepLink,
         });
 
