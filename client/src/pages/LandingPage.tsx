@@ -289,6 +289,184 @@ const landingCSS = `
   .sc-landing .social-proof { gap: 24px; }
   .sc-landing .proof-divider { display: none; }
 }
+
+/* CONVERSATIONAL FUNNEL */
+.sc-landing .sc-funnel {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sc-landing .sc-funnel-bot-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sc-landing .sc-funnel-bot-avatar {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sc-landing .sc-funnel-bot-bubble {
+  background: rgba(255,255,255,0.06);
+  border-radius: 18px;
+  border-bottom-left-radius: 6px;
+  padding: 14px 18px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 380px;
+}
+
+.sc-landing .sc-funnel-user-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sc-landing .sc-funnel-user-bubble {
+  background: rgba(245,166,35,0.15);
+  border-radius: 18px;
+  border-bottom-right-radius: 6px;
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-width: 320px;
+}
+
+.sc-landing .sc-funnel-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 36px;
+}
+
+.sc-landing .sc-funnel-choices-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.sc-landing .sc-funnel-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+  opacity: 0;
+  animation: scFunnelFadeUp 0.3s ease forwards;
+}
+
+.sc-landing .sc-funnel-choice:hover {
+  border-color: rgba(245,166,35,0.2);
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-2px);
+}
+
+.sc-landing .sc-funnel-choice-icon {
+  font-size: 20px;
+}
+
+.sc-landing .sc-funnel-choice-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.sc-landing .sc-funnel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-left: 36px;
+  animation: scFunnelFadeUp 0.3s ease forwards;
+}
+
+.sc-landing .sc-funnel-input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.sc-landing .sc-funnel-input::placeholder {
+  color: var(--text-muted);
+}
+
+.sc-landing .sc-funnel-input:focus {
+  border-color: rgba(245,166,35,0.4);
+}
+
+.sc-landing .sc-funnel-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  border-radius: 100px;
+  background: var(--sun-gold);
+  color: var(--deep-earth);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.sc-landing .sc-funnel-submit:hover {
+  background: #FFB840;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(245,166,35,0.3);
+}
+
+.sc-landing .sc-funnel-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sc-landing .sc-funnel-cta-row {
+  margin-left: 36px;
+  animation: scFunnelFadeUp 0.3s ease forwards;
+}
+
+.sc-landing .sc-funnel-note {
+  margin-left: 36px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+@keyframes scFunnelFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .sc-landing .sc-funnel { max-width: 100%; }
+  .sc-landing .sc-funnel-choices { margin-left: 0; }
+  .sc-landing .sc-funnel-choices-grid { grid-template-columns: 1fr; }
+  .sc-landing .sc-funnel-form { margin-left: 0; }
+  .sc-landing .sc-funnel-cta-row { margin-left: 0; }
+  .sc-landing .sc-funnel-note { margin-left: 0; }
+  .sc-landing .sc-funnel-bot-bubble { max-width: 280px; }
+  .sc-landing .sc-funnel-user-bubble { max-width: 260px; }
+}
 `;
 
 export default function LandingPage() {
