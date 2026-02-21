@@ -94,6 +94,244 @@ const chatBotIcon = (
   </svg>
 );
 
+// Feature icons - SunClaw mini-characters
+const FeatureIconFinancial = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="32" cy="44" r="18" fill="#F5A623"/>
+    <path d="M18 28 C16 22, 12 18, 8 17 C4 16, 3 19, 5 22 C7 25, 10 28, 14 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="8" cy="16" r="2.5" fill="#E8664A"/>
+    <path d="M46 28 C48 22, 51 19, 54 19 C57 19, 57 22, 55 24 C53 26, 50 28, 47 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="54" cy="18" r="2.5" fill="#E8664A"/>
+    <circle cx="26" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="38" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="27" cy="40" r="1" fill="#FFF"/>
+    <circle cx="39" cy="40" r="1" fill="#FFF"/>
+    <path d="M27 49 Q32 53 37 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <rect x="56" y="50" width="7" height="18" rx="2" fill="#E8664A" opacity="0.7"/>
+    <rect x="65" y="38" width="7" height="30" rx="2" fill="#F5A623" opacity="0.9"/>
+    <rect x="56" y="48" width="7" height="20" rx="2" fill="#E8664A" opacity="0.6"/>
+    <line x1="53" y1="68" x2="76" y2="68" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>
+  </svg>
+);
+
+const FeatureIconTracker = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="40" cy="44" r="18" fill="#F5A623"/>
+    <path d="M26 28 C24 22, 20 18, 16 17 C12 16, 11 19, 13 22 C15 25, 18 28, 22 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="16" cy="16" r="2.5" fill="#E8664A"/>
+    <path d="M54 28 C56 22, 60 18, 64 17 C68 16, 69 19, 67 22 C65 25, 62 28, 58 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="64" cy="16" r="2.5" fill="#E8664A"/>
+    <circle cx="34" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="46" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="35" cy="40" r="1" fill="#FFF"/>
+    <circle cx="47" cy="40" r="1" fill="#FFF"/>
+    <path d="M35 49 Q40 53 45 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <rect x="10" y="36" width="16" height="22" rx="3" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.6"/>
+    <rect x="14" y="33" width="8" height="5" rx="2" fill="#E8664A" opacity="0.5"/>
+    <path d="M13 43 L15 45 L19 40" stroke="#F5A623" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    <path d="M13 50 L15 52 L19 47" stroke="#F5A623" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    <line x1="21" y1="42" x2="24" y2="42" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
+    <line x1="21" y1="49" x2="24" y2="49" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
+  </svg>
+);
+
+const FeatureIconDiagnostics = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="36" cy="44" r="18" fill="#F5A623"/>
+    <path d="M22 28 C20 22, 16 18, 12 17 C8 16, 7 19, 9 22 C11 25, 14 28, 18 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="12" cy="16" r="2.5" fill="#E8664A"/>
+    <path d="M50 28 C52 22, 56 18, 60 17 C64 16, 65 19, 63 22 C61 25, 58 28, 54 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="60" cy="16" r="2.5" fill="#E8664A"/>
+    <circle cx="30" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="42" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="31" cy="40" r="1" fill="#FFF"/>
+    <circle cx="43" cy="40" r="1" fill="#FFF"/>
+    <path d="M31 49 Q36 53 41 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <line x1="58" y1="30" x2="68" y2="50" stroke="#E8664A" strokeWidth="3" strokeLinecap="round" opacity="0.8"/>
+    <circle cx="70" cy="54" r="6" stroke="#E8664A" strokeWidth="2.5" fill="none" opacity="0.7"/>
+    <line x1="73" y1="48" x2="76" y2="45" stroke="#E8664A" strokeWidth="2.5" strokeLinecap="round" opacity="0.7"/>
+  </svg>
+);
+
+const FeatureIconDocument = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="40" cy="38" r="18" fill="#F5A623"/>
+    <path d="M26 22 C24 16, 20 12, 16 11 C12 10, 11 13, 13 16 C15 19, 18 22, 22 23" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="16" cy="10" r="2.5" fill="#E8664A"/>
+    <path d="M54 22 C56 16, 60 12, 64 11 C68 10, 69 13, 67 16 C65 19, 62 22, 58 23" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="64" cy="10" r="2.5" fill="#E8664A"/>
+    <circle cx="34" cy="36" r="2.5" fill="#1A1612"/>
+    <circle cx="46" cy="36" r="2.5" fill="#1A1612"/>
+    <circle cx="34.5" cy="37" r="1" fill="#FFF"/>
+    <circle cx="46.5" cy="37" r="1" fill="#FFF"/>
+    <path d="M35 44 Q40 47 45 44" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <rect x="24" y="50" width="32" height="24" rx="3" fill="#1A1612" stroke="#E8664A" strokeWidth="1.5" opacity="0.8"/>
+    <line x1="29" y1="57" x2="51" y2="57" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
+    <line x1="29" y1="61" x2="47" y2="61" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
+    <line x1="29" y1="65" x2="51" y2="65" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
+    <line x1="29" y1="69" x2="42" y2="69" stroke="#E8664A" strokeWidth="1" opacity="0.4"/>
+    <path d="M48 50 L56 50 L56 58 Z" fill="#E8664A" opacity="0.15"/>
+  </svg>
+);
+
+const FeatureIconKnowledge = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="40" cy="48" r="18" fill="#F5A623"/>
+    <path d="M26 32 C24 26, 22 21, 20 18 C18 15, 16 17, 17 20 C18 23, 20 27, 23 30" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="20" cy="17" r="2.5" fill="#E8664A"/>
+    <path d="M54 32 C56 26, 58 21, 60 18 C62 15, 64 17, 63 20 C62 23, 60 27, 57 30" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="60" cy="17" r="2.5" fill="#E8664A"/>
+    <circle cx="34" cy="44" r="2.5" fill="#1A1612"/>
+    <circle cx="46" cy="44" r="2.5" fill="#1A1612"/>
+    <circle cx="34.5" cy="43" r="1" fill="#FFF"/>
+    <circle cx="46.5" cy="43" r="1" fill="#FFF"/>
+    <path d="M35 53 Q40 57 45 53" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <circle cx="40" cy="10" r="8" stroke="#E8664A" strokeWidth="2" fill="none" opacity="0.7"/>
+    <line x1="37" y1="18" x2="37" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+    <line x1="43" y1="18" x2="43" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+    <line x1="36" y1="22" x2="44" y2="22" stroke="#E8664A" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+    <line x1="40" y1="0" x2="40" y2="3" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>
+    <line x1="30" y1="6" x2="28" y2="4" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" opacity="0.3"/>
+    <line x1="50" y1="6" x2="52" y2="4" stroke="#F5A623" strokeWidth="1.5" strokeLinecap="round" opacity="0.3"/>
+  </svg>
+);
+
+const FeatureIconCommunication = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="32" cy="44" r="18" fill="#F5A623"/>
+    <path d="M18 28 C16 22, 12 18, 8 17 C4 16, 3 19, 5 22 C7 25, 10 28, 14 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="8" cy="16" r="2.5" fill="#E8664A"/>
+    <path d="M46 28 C48 22, 52 18, 56 17 C60 16, 61 19, 59 22 C57 25, 54 28, 50 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="56" cy="16" r="2.5" fill="#E8664A"/>
+    <circle cx="26" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="38" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="27" cy="40" r="1" fill="#FFF"/>
+    <circle cx="39" cy="40" r="1" fill="#FFF"/>
+    <ellipse cx="32" cy="51" rx="4" ry="3" fill="#1A1612"/>
+    <rect x="52" y="32" width="24" height="18" rx="8" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.6"/>
+    <path d="M56 50 L52 56 L60 50" stroke="#E8664A" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.6"/>
+    <circle cx="59" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
+    <circle cx="64" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
+    <circle cx="69" cy="41" r="1.5" fill="#E8664A" opacity="0.5"/>
+  </svg>
+);
+
+const FeatureIconMultilingual = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="40" cy="44" r="18" fill="#F5A623"/>
+    <path d="M26 28 C24 22, 20 18, 16 17 C12 16, 11 19, 13 22 C15 25, 18 28, 22 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="16" cy="16" r="2.5" fill="#E8664A"/>
+    <path d="M54 28 C56 22, 60 18, 64 17 C68 16, 69 19, 67 22 C65 25, 62 28, 58 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="64" cy="16" r="2.5" fill="#E8664A"/>
+    <circle cx="34" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="46" cy="41" r="2.5" fill="#1A1612"/>
+    <circle cx="35" cy="40" r="1" fill="#FFF"/>
+    <circle cx="47" cy="40" r="1" fill="#FFF"/>
+    <path d="M35 49 Q40 53 45 49" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <rect x="2" y="36" width="18" height="14" rx="6" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.5"/>
+    <text x="7" y="46" fontFamily="DM Sans" fontSize="8" fill="#E8664A" opacity="0.6">Fr</text>
+    <rect x="60" y="32" width="18" height="14" rx="6" stroke="#E8664A" strokeWidth="1.5" fill="none" opacity="0.5"/>
+    <text x="64" y="42" fontFamily="DM Sans" fontSize="8" fill="#E8664A" opacity="0.6">Yo</text>
+    <rect x="30" y="4" width="20" height="14" rx="6" stroke="#F5A623" strokeWidth="1.5" fill="none" opacity="0.4"/>
+    <text x="36" y="14" fontFamily="DM Sans" fontSize="8" fill="#F5A623" opacity="0.5">En</text>
+  </svg>
+);
+
+const FeatureIconEV = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="40" cy="46" r="18" fill="#F5A623"/>
+    <path d="M26 30 C24 24, 21 19, 18 17 C15 15, 13 18, 15 21 C17 24, 20 27, 23 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="18" cy="16" r="2.5" fill="#E8664A"/>
+    <path d="M54 30 C56 24, 59 19, 62 17 C65 15, 67 18, 65 21 C63 24, 60 27, 57 29" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="62" cy="16" r="2.5" fill="#E8664A"/>
+    <circle cx="34" cy="43" r="2.5" fill="#1A1612"/>
+    <circle cx="46" cy="43" r="2.5" fill="#1A1612"/>
+    <circle cx="35" cy="42" r="1" fill="#FFF"/>
+    <circle cx="47" cy="42" r="1" fill="#FFF"/>
+    <path d="M35 51 Q40 55 45 51" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <path d="M44 4 L36 20 L44 20 L34 38 L48 16 L40 16 Z" fill="#E8664A" opacity="0.75"/>
+    <circle cx="30" cy="8" r="1.5" fill="#F5A623" opacity="0.4"/>
+    <circle cx="52" cy="12" r="1" fill="#F5A623" opacity="0.3"/>
+  </svg>
+);
+
+const FeatureIconData = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="32" cy="40" r="18" fill="#F5A623"/>
+    <path d="M18 24 C16 18, 12 14, 8 13 C4 12, 3 15, 5 18 C7 21, 10 24, 14 25" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="8" cy="12" r="2.5" fill="#E8664A"/>
+    <path d="M46 24 C48 18, 52 14, 56 13 C60 12, 61 15, 59 18 C57 21, 54 24, 50 25" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="56" cy="12" r="2.5" fill="#E8664A"/>
+    <circle cx="26" cy="37" r="2.5" fill="#1A1612"/>
+    <circle cx="38" cy="37" r="2.5" fill="#1A1612"/>
+    <circle cx="27" cy="36" r="1" fill="#FFF"/>
+    <circle cx="39" cy="36" r="1" fill="#FFF"/>
+    <path d="M27 45 Q32 49 37 45" stroke="#1A1612" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <path d="M50 68 L56 58 L62 62 L68 48 L74 36 L78 28" stroke="#E8664A" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.7"/>
+    <path d="M76 24 L78 28 L74 30" stroke="#E8664A" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.7"/>
+    <line x1="48" y1="68" x2="80" y2="68" stroke="#E8664A" strokeWidth="1" opacity="0.2"/>
+    <line x1="48" y1="68" x2="48" y2="24" stroke="#E8664A" strokeWidth="1" opacity="0.2"/>
+  </svg>
+);
+
+const FeatureIconCommunity = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="26" cy="46" r="14" fill="#F5A623"/>
+    <path d="M16 30 C14 25, 11 22, 8 21 C5 20, 4 23, 6 25 C8 27, 10 29, 13 30" stroke="#E8664A" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    <circle cx="8" cy="20" r="2" fill="#E8664A"/>
+    <path d="M36 30 C37 25, 39 23, 40 24" stroke="#E8664A" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    <circle cx="21" cy="43" r="2" fill="#1A1612"/>
+    <circle cx="31" cy="43" r="2" fill="#1A1612"/>
+    <circle cx="22" cy="42" r="0.8" fill="#FFF"/>
+    <circle cx="32" cy="42" r="0.8" fill="#FFF"/>
+    <path d="M22 50 Q26 53 30 50" stroke="#1A1612" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    <circle cx="56" cy="46" r="14" fill="#F5A623"/>
+    <path d="M66 30 C68 25, 71 22, 74 21 C77 20, 78 23, 76 25 C74 27, 72 29, 69 30" stroke="#E8664A" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    <circle cx="74" cy="20" r="2" fill="#E8664A"/>
+    <path d="M46 30 C45 25, 43 23, 42 24" stroke="#E8664A" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+    <circle cx="51" cy="43" r="2" fill="#1A1612"/>
+    <circle cx="61" cy="43" r="2" fill="#1A1612"/>
+    <circle cx="51.5" cy="42" r="0.8" fill="#FFF"/>
+    <circle cx="61.5" cy="42" r="0.8" fill="#FFF"/>
+    <path d="M52 50 Q56 53 60 50" stroke="#1A1612" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    <circle cx="41" cy="38" r="2" fill="#E8664A" opacity="0.5"/>
+    <circle cx="41" cy="32" r="1.2" fill="#F5A623" opacity="0.4"/>
+    <circle cx="38" cy="35" r="1" fill="#E8664A" opacity="0.3"/>
+    <circle cx="44" cy="35" r="1" fill="#E8664A" opacity="0.3"/>
+  </svg>
+);
+
+const FeatureIconSecurity = () => (
+  <svg viewBox="0 0 80 80" fill="none" width="56" height="56">
+    <circle cx="40" cy="40" r="18" fill="#F5A623"/>
+    <path d="M26 24 C24 18, 20 14, 16 13 C12 12, 11 15, 13 18 C15 21, 18 24, 22 25" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="16" cy="12" r="2.5" fill="#E8664A"/>
+    <path d="M54 24 C56 18, 60 14, 64 13 C68 12, 69 15, 67 18 C65 21, 62 24, 58 25" stroke="#E8664A" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle cx="64" cy="12" r="2.5" fill="#E8664A"/>
+    <circle cx="34" cy="35" r="2.5" fill="#1A1612"/>
+    <circle cx="46" cy="35" r="2.5" fill="#1A1612"/>
+    <circle cx="35" cy="34" r="1" fill="#FFF"/>
+    <circle cx="47" cy="34" r="1" fill="#FFF"/>
+    <path d="M40 42 L26 48 L26 58 C26 68, 40 76, 40 76 C40 76, 54 68, 54 58 L54 48 Z" fill="#1A1612" stroke="#E8664A" strokeWidth="1.5" opacity="0.85"/>
+    <path d="M34 58 L38 63 L48 52" stroke="#F5A623" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+// Feature icons map
+const featureIcons: Record<string, React.FC> = {
+  "Financial Modeling": FeatureIconFinancial,
+  "Project Development Tracker": FeatureIconTracker,
+  "Field Diagnostics": FeatureIconDiagnostics,
+  "Document Engine": FeatureIconDocument,
+  "Knowledge Hub": FeatureIconKnowledge,
+  "Communication & Productivity": FeatureIconCommunication,
+  "Multilingual Support": FeatureIconMultilingual,
+  "EV & Emerging Tech": FeatureIconEV,
+  "Data & Analytics": FeatureIconData,
+  "Community & Network Effects": FeatureIconCommunity,
+  "Security, Privacy & Trust": FeatureIconSecurity,
+};
+
 // All CSS from the original HTML, scoped under .sc-landing
 const landingCSS = `
 .sc-landing {
@@ -151,17 +389,18 @@ const landingCSS = `
 }
 @keyframes heroGlow { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
 @keyframes clawWave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-6deg); } 75% { transform: rotate(6deg); } }
-.sc-landing .hero-logo { position: relative; z-index: 2; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+.sc-landing .hero-logo { position: relative; z-index: 2; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
 .sc-landing .hero-logo .claw-anim { animation: clawWave 3s ease-in-out infinite; transform-origin: 60px 26px; }
 .sc-landing .hero h1 {
   font-family: 'Outfit', sans-serif; font-size: clamp(40px, 6vw, 72px); font-weight: 800;
   text-align: center; line-height: 1.1; max-width: 960px; position: relative; z-index: 2;
+  margin-bottom: 20px;
   opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
 }
 .sc-landing .hero h1 .gold { color: var(--sun-gold); }
 .sc-landing .hero h1 .coral { color: var(--lobster-coral); }
 .sc-landing .hero-sub {
-  font-size: 18px; color: var(--text-secondary); text-align: center; max-width: 620px; margin-top: 24px;
+  font-size: 18px; color: var(--text-secondary); text-align: center; max-width: 620px;
   position: relative; z-index: 2; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
 }
 .sc-landing .hero-ctas {
@@ -187,6 +426,56 @@ const landingCSS = `
   margin-bottom: 24px; position: relative; z-index: 2; opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s;
 }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* DEVELOPER STRIP */
+.sc-landing .dev-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  transition: all 0.3s;
+  margin-top: 48px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.7s;
+}
+
+.sc-landing .dev-strip:hover {
+  border-color: rgba(245,166,35,0.2);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-1px);
+}
+
+.sc-landing .dev-strip-icon {
+  font-size: 16px;
+}
+
+.sc-landing .dev-strip-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.sc-landing .dev-strip:hover .dev-strip-text {
+  color: var(--text-primary);
+}
+
+.sc-landing .dev-strip-arrow {
+  color: #F5A623;
+  font-size: 14px;
+  transition: transform 0.3s;
+}
+
+.sc-landing .dev-strip:hover .dev-strip-arrow {
+  transform: translateX(3px);
+}
 
 /* SOCIAL PROOF */
 .sc-landing .social-proof {
@@ -220,7 +509,7 @@ const landingCSS = `
 .sc-landing .features-section { padding: 120px 40px; max-width: 1280px; margin: 0 auto; }
 .sc-landing .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .sc-landing .feature-card {
-  padding: 36px; border-radius: 20px; background: rgba(255,255,255,0.02);
+  padding: 28px; border-radius: 20px; background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06); transition: all 0.4s;
 }
 .sc-landing .feature-card:hover { border-color: rgba(245,166,35,0.15); transform: translateY(-2px); }
@@ -228,7 +517,46 @@ const landingCSS = `
   grid-column: span 3; background: linear-gradient(135deg, rgba(245,166,35,0.06), rgba(232,102,74,0.04));
   border-color: rgba(245,166,35,0.15); display: flex; gap: 48px; align-items: center;
 }
-.sc-landing .feature-icon { font-size: 28px; margin-bottom: 16px; }
+
+/* FEATURE ICON WITH ANIMATION */
+.sc-landing .feature-icon-wrap {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 16px;
+}
+
+.sc-landing .feature-icon-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,166,35,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sc-landing .feature-card:hover .feature-icon-wrap::before {
+  opacity: 1;
+}
+
+.sc-landing .feature-icon {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.sc-landing .feature-card:hover .feature-icon {
+  animation: scFeatureBounce 0.4s ease forwards;
+}
+
+@keyframes scFeatureBounce {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+  70% { transform: translateY(-2px); }
+  100% { transform: translateY(-3px); }
+}
+
 .sc-landing .feature-card h3 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
 .sc-landing .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
 .sc-landing .feature-tag { display: inline-block; padding: 4px 12px; border-radius: 100px; background: rgba(245,166,35,0.1); font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--sun-gold); margin-bottom: 12px; }
@@ -289,137 +617,22 @@ const landingCSS = `
   .sc-landing .how-section, .sc-landing .features-section, .sc-landing .marketplace-section, .sc-landing .cta-section { padding: 80px 24px; }
   .sc-landing .social-proof { gap: 24px; }
   .sc-landing .proof-divider { display: none; }
-}
-
-/* HERO TRACKS (Two-Column Layout) */
-.sc-landing .hero-tracks {
-  display: grid;
-  grid-template-columns: 65fr 35fr;
-  gap: 32px;
-  width: 100%;
-  max-width: 1100px;
-  align-items: flex-start;
-}
-
-.sc-landing .hero-track-left {
-  min-width: 0;
-}
-
-.sc-landing .hero-track-right {
-  min-width: 0;
-}
-
-/* DEPLOY CARD */
-.sc-landing .deploy-card {
-  padding: 32px 28px;
-  border-radius: 20px;
-  background: rgba(232,102,74,0.06);
-  border: 1px solid rgba(232,102,74,0.15);
-  position: sticky;
-  top: 100px;
-}
-
-.sc-landing .deploy-card-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: 100px;
-  background: rgba(232,102,74,0.12);
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--lobster-coral);
-  margin-bottom: 16px;
-}
-
-.sc-landing .deploy-card h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-  margin-bottom: 12px;
-}
-
-.sc-landing .deploy-card p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.sc-landing .deploy-tiers {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.sc-landing .deploy-tier {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.sc-landing .deploy-tier-check {
-  color: var(--lobster-coral);
-  font-size: 12px;
-}
-
-.sc-landing .deploy-terminal {
-  padding: 16px;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.3);
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 20px;
-  overflow-x: auto;
-}
-
-.sc-landing .deploy-terminal .cmd {
-  color: var(--lobster-coral);
-}
-
-.sc-landing .deploy-terminal .arg {
-  color: var(--text-secondary);
-}
-
-.sc-landing .deploy-card-cta {
-  display: block;
-  width: 100%;
-  padding: 14px 24px;
-  border-radius: 100px;
-  background: var(--lobster-coral);
-  color: var(--deep-earth);
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.sc-landing .deploy-card-cta:hover {
-  background: #F07A5E;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(232,102,74,0.25);
+  .sc-landing .dev-strip { padding: 10px 16px; }
+  .sc-landing .dev-strip-text { font-size: 11px; }
 }
 
 /* CONVERSATIONAL FUNNEL */
 .sc-landing .sc-funnel {
-  max-width: 520px;
+  max-width: 680px;
   width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.9s;
 }
 
 .sc-landing .sc-funnel-bot-row {
@@ -441,7 +654,7 @@ const landingCSS = `
   font-size: 15px;
   line-height: 1.6;
   color: var(--text-secondary);
-  max-width: 380px;
+  max-width: 480px;
 }
 
 .sc-landing .sc-funnel-user-row {
@@ -457,28 +670,22 @@ const landingCSS = `
   font-size: 14px;
   line-height: 1.5;
   color: var(--text-primary);
-  max-width: 320px;
+  max-width: 400px;
 }
 
 .sc-landing .sc-funnel-choices {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-left: 36px;
 }
 
-.sc-landing .sc-funnel-choices-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
 .sc-landing .sc-funnel-choice {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-  padding: 16px 20px;
-  border-radius: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
   cursor: pointer;
@@ -496,28 +703,39 @@ const landingCSS = `
 
 .sc-landing .sc-funnel-choice-icon {
   font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .sc-landing .sc-funnel-choice-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--text-primary);
+  line-height: 1.4;
 }
 
-/* Role picker with descriptors */
-.sc-landing .sc-funnel-roles {
+.sc-landing .sc-funnel-choice-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* Region picker */
+.sc-landing .sc-funnel-regions {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-left: 36px;
 }
 
-.sc-landing .sc-funnel-role {
+.sc-landing .sc-funnel-region {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 14px;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
   cursor: pointer;
@@ -527,38 +745,20 @@ const landingCSS = `
   animation: scFunnelFadeUp 0.3s ease forwards;
 }
 
-.sc-landing .sc-funnel-role:hover {
+.sc-landing .sc-funnel-region:hover {
   border-color: rgba(245,166,35,0.2);
   background: rgba(255,255,255,0.04);
   transform: translateY(-2px);
 }
 
-.sc-landing .sc-funnel-role-icon {
-  font-size: 20px;
-  flex-shrink: 0;
+.sc-landing .sc-funnel-region-icon {
+  font-size: 16px;
 }
 
-.sc-landing .sc-funnel-role-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.sc-landing .sc-funnel-role-label {
+.sc-landing .sc-funnel-region-label {
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
-  font-weight: 500;
   color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sc-landing .sc-funnel-role-descriptor {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  color: var(--text-muted);
 }
 
 .sc-landing .sc-funnel-form {
@@ -566,6 +766,7 @@ const landingCSS = `
   flex-direction: column;
   gap: 12px;
   margin-left: 36px;
+  max-width: 400px;
   animation: scFunnelFadeUp 0.3s ease forwards;
 }
 
@@ -631,29 +832,26 @@ const landingCSS = `
   margin-top: 8px;
 }
 
+.sc-landing .sc-funnel-link {
+  color: var(--sun-gold);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.sc-landing .sc-funnel-link:hover {
+  color: #FFB840;
+}
+
 @keyframes scFunnelFadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 900px) {
-  .sc-landing .hero-tracks {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .sc-landing .deploy-card {
-    position: static;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-}
-
 @media (max-width: 768px) {
   .sc-landing .sc-funnel { max-width: 100%; }
-  .sc-landing .sc-funnel-choices { margin-left: 0; }
-  .sc-landing .sc-funnel-choices-grid { grid-template-columns: 1fr; }
-  .sc-landing .sc-funnel-roles { margin-left: 0; grid-template-columns: 1fr; }
-  .sc-landing .sc-funnel-form { margin-left: 0; }
+  .sc-landing .sc-funnel-choices { margin-left: 0; grid-template-columns: 1fr; }
+  .sc-landing .sc-funnel-regions { margin-left: 0; grid-template-columns: 1fr; }
+  .sc-landing .sc-funnel-form { margin-left: 0; max-width: 100%; }
   .sc-landing .sc-funnel-cta-row { margin-left: 0; }
   .sc-landing .sc-funnel-note { margin-left: 0; }
   .sc-landing .sc-funnel-bot-bubble { max-width: 280px; }
@@ -674,12 +872,26 @@ export default function LandingPage() {
   useEffect(() => {
     // Smooth scroll to hash anchor if present
     const hash = window.location.hash;
-    if (hash === "#talk" || hash === "#marketplace") {
+    if (hash === "#talk" || hash === "#marketplace" || hash === "#deploy" || hash === "#features") {
       setTimeout(() => {
         document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     }
   }, []);
+
+  const features = [
+    { title: "Financial Modeling", desc: "LCOE, IRR, NPV, payback period. Run sensitivity analyses through conversation. Compare financing structures (lease vs PPA vs direct purchase). Generate investor-ready projections." },
+    { title: "Project Development Tracker", desc: "From land acquisition to commissioning. Country-specific checklists, progress tracking, dependency flags, and proactive nudges on next steps." },
+    { title: "Field Diagnostics", desc: "Send a photo of a fault, wiring issue, or error code. SunClaw identifies the problem and walks technicians through the fix, step by step. Safety guidance included." },
+    { title: "Document Engine", desc: "Generate proposals, RFQ documents, due diligence packages, and impact reports. Upload PDFs and SunClaw extracts and structures the data." },
+    { title: "Knowledge Hub", desc: "Personalized industry feed, active grant and tender listings, market intelligence, and a best practices library tailored to your role and region." },
+    { title: "Communication & Productivity", desc: "Meeting transcription, email drafting, reminders, calendar integration. The daily productivity layer that keeps you coming back." },
+    { title: "Multilingual Support", desc: "Auto language detection, code-switching between languages mid-conversation, cross-party translation for multi-stakeholder deals, and cultural context awareness." },
+    { title: "EV & Emerging Tech", desc: "EV charging infrastructure advisory, green hydrogen, advanced energy storage, and mini-grid/microgrid design. Forward-looking from day one." },
+    { title: "Data & Analytics", desc: "Every conversation generates data. Aggregated and anonymized, it becomes market intelligence no one else has. Analytics products for subscribers." },
+    { title: "Community & Network Effects", desc: "Peer networking, mentorship matching, virtual events, and user-generated content. The platform gets more valuable with every new user." },
+    { title: "Security, Privacy & Trust", desc: "Per-user data isolation, GDPR compliance, verification systems, fraud prevention, and ethical AI practices. Trust is the currency of a marketplace." },
+  ];
 
   return (
     <div className="sc-landing">
@@ -704,39 +916,15 @@ export default function LandingPage() {
         <div className="hero-logo"><HeroLogo /></div>
         <h1>The <span className="gold">energy conversation</span> the world's been waiting for.</h1>
         <p className="hero-sub">SunClaw is your AI-powered advisor for renewable energy. Whether you're developing a project or providing the services to build one, SunClaw matches you to the right people through conversation.</p>
-        <div id="talk" className="hero-tracks">
-          <div className="hero-track-left">
-            <ConversationalFunnel />
-          </div>
-          <div className="hero-track-right">
-            <div className="deploy-card" id="marketplace">
-              <div className="deploy-card-badge">🤖 For Developers</div>
-              <h3>Deploy your own<br/>SunClaw agent</h3>
-              <p>Get a personal AI agent pre-loaded with 11 RE skills, running on your own infrastructure or ours.</p>
-              <div className="deploy-tiers">
-                <div className="deploy-tier">
-                  <span className="deploy-tier-check">✓</span>
-                  <span>Free: guided self-setup, BYO keys</span>
-                </div>
-                <div className="deploy-tier">
-                  <span className="deploy-tier-check">✓</span>
-                  <span>Pro ($29/mo): managed hosting, 3 bots</span>
-                </div>
-                <div className="deploy-tier">
-                  <span className="deploy-tier-check">✓</span>
-                  <span>Enterprise ($99/mo): dedicated infra</span>
-                </div>
-              </div>
-              <div className="deploy-terminal">
-                <span className="cmd">$</span> <span className="arg">npx sunclaw setup</span><br/>
-                <span>  ☞ Loading 11 RE skills...</span><br/>
-                <span>  ☞ Solar Irradiance ✓</span><br/>
-                <span>  ☞ LCOE Calculator ✓</span><br/>
-                <span>  ☞ PV Design ✓</span>
-              </div>
-              <a href="/agent/setup" className="deploy-card-cta">Launch Setup Wizard</a>
-            </div>
-          </div>
+
+        <a href="#deploy" className="dev-strip">
+          <span className="dev-strip-icon">🤖</span>
+          <span className="dev-strip-text">Developers: deploy your own RE-native agent</span>
+          <span className="dev-strip-arrow">→</span>
+        </a>
+
+        <div id="talk">
+          <ConversationalFunnel />
         </div>
       </section>
 
@@ -821,30 +1009,25 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {[
-            { icon: "📊", title: "Financial Modeling", desc: "LCOE, IRR, NPV, payback period. Run sensitivity analyses through conversation. Compare financing structures (lease vs PPA vs direct purchase). Generate investor-ready projections." },
-            { icon: "📋", title: "Project Development Tracker", desc: "From land acquisition to commissioning. Country-specific checklists, progress tracking, dependency flags, and proactive nudges on next steps." },
-            { icon: "🔧", title: "Field Diagnostics", desc: "Send a photo of a fault, wiring issue, or error code. SunClaw identifies the problem and walks technicians through the fix, step by step. Safety guidance included." },
-            { icon: "📄", title: "Document Engine", desc: "Generate proposals, RFQ documents, due diligence packages, and impact reports. Upload PDFs and SunClaw extracts and structures the data." },
-            { icon: "🧠", title: "Knowledge Hub", desc: "Personalized industry feed, active grant and tender listings, market intelligence, and a best practices library tailored to your role and region." },
-            { icon: "🗓️", title: "Communication & Productivity", desc: "Meeting transcription, email drafting, reminders, calendar integration. The daily productivity layer that keeps you coming back." },
-            { icon: "🌍", title: "Multilingual Support", desc: "Auto language detection, code-switching between languages mid-conversation, cross-party translation for multi-stakeholder deals, and cultural context awareness." },
-            { icon: "⚡", title: "EV & Emerging Tech", desc: "EV charging infrastructure advisory, green hydrogen, advanced energy storage, and mini-grid/microgrid design. Forward-looking from day one." },
-            { icon: "📈", title: "Data & Analytics", desc: "Every conversation generates data. Aggregated and anonymized, it becomes market intelligence no one else has. Analytics products for subscribers." },
-            { icon: "👥", title: "Community & Network Effects", desc: "Peer networking, mentorship matching, virtual events, and user-generated content. The platform gets more valuable with every new user." },
-            { icon: "🔒", title: "Security, Privacy & Trust", desc: "Per-user data isolation, GDPR compliance, verification systems, fraud prevention, and ethical AI practices. Trust is the currency of a marketplace." },
-          ].map((f, i) => (
-            <div className="feature-card" key={i}>
-              <div className="feature-icon">{f.icon}</div>
-              <h3>{f.title}</h3>
-              <p>{f.desc}</p>
-            </div>
-          ))}
+          {features.map((f, i) => {
+            const IconComponent = featureIcons[f.title];
+            return (
+              <div className="feature-card" key={i}>
+                <div className="feature-icon-wrap">
+                  <div className="feature-icon">
+                    {IconComponent ? <IconComponent /> : null}
+                  </div>
+                </div>
+                <h3>{f.title}</h3>
+                <p>{f.desc}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
 
       {/* MARKETPLACE */}
-      <section className="marketplace-section">
+      <section className="marketplace-section" id="marketplace">
         <div className="marketplace-inner">
           <div className="section-eyebrow">The Marketplace</div>
           <h2 className="section-heading">Every conversation powers something.</h2>
@@ -872,7 +1055,7 @@ export default function LandingPage() {
       </section>
 
       {/* DEPLOY YOUR OWN */}
-      <section style={{ padding: "100px 40px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+      <section id="deploy" style={{ padding: "100px 40px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
             <div>
@@ -915,7 +1098,7 @@ export default function LandingPage() {
           <CtaLogo />
           <h2>Clean energy starts<br/>with a <span style={{ color: "var(--sun-gold)" }}>message</span>.</h2>
           <p>Whether you're building projects or providing the services to build them, join the waitlist for the conversational operating system for renewable energy.</p>
-          <a href="#talk" className="btn-primary" style={{ display: "inline-block" }}>Start the Conversation</a>
+          <a href="#talk" className="btn-primary" style={{ display: "inline-block" }}>Start the conversation</a>
         </div>
       </section>
 

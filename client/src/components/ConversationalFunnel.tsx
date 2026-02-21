@@ -26,50 +26,50 @@ const ROLE_OPTIONS = [
   {
     id: "energy_buyer",
     icon: "☀️",
-    label: "I need renewable energy",
-    descriptor: "C&I, utility, government",
+    label: "I need solar or clean energy",
+    descriptor: "Homes, businesses, communities, public buildings",
   },
   {
     id: "developer",
     icon: "🏗️",
-    label: "I develop RE projects",
-    descriptor: "IPP, mini-grid, rooftop",
+    label: "I'm developing an energy project",
+    descriptor: "Developers, asset owners, IPPs, startups",
   },
   {
     id: "service_provider",
     icon: "🔧",
     label: "I provide RE services",
-    descriptor: "EPC, O&M, consultant",
+    descriptor: "Installers, EPCs, O&M, consultants, engineers",
   },
   {
     id: "investor",
     icon: "💰",
-    label: "I finance RE projects",
-    descriptor: "DFI, PE, VC, bank",
+    label: "I invest in or finance energy",
+    descriptor: "DFIs, VCs, banks, carbon buyers, insurance",
   },
   {
     id: "talent",
     icon: "👤",
-    label: "I'm looking for work",
-    descriptor: "Job seeker, freelancer",
+    label: "I'm hiring or job hunting in RE",
+    descriptor: "Job seekers, recruiters, HR teams",
   },
   {
     id: "supplier",
-    icon: "📦",
-    label: "I supply RE equipment",
-    descriptor: "OEM, distributor, trader",
+    icon: "⚡",
+    label: "I sell equipment or technology",
+    descriptor: "Suppliers, OEMs, distributors",
   },
   {
     id: "researcher",
-    icon: "📊",
-    label: "I research the sector",
-    descriptor: "Academic, analyst, journalist",
+    icon: "🎓",
+    label: "I'm researching or studying RE",
+    descriptor: "Students, academics, journalists, educators",
   },
   {
     id: "curious",
-    icon: "🌱",
-    label: "Just curious",
-    descriptor: "Exploring options",
+    icon: "💬",
+    label: "Just show me what SunClaw can do",
+    descriptor: null, // No descriptor for curious
   },
 ] as const;
 
@@ -81,7 +81,7 @@ const REGION_OPTIONS = [
   { id: "europe", label: "Europe" },
   { id: "asia_pacific", label: "Asia-Pacific" },
   { id: "americas", label: "Americas" },
-  { id: "other", label: "Other" },
+  { id: "global", label: "Global / Multiple Regions" },
 ];
 
 export default function ConversationalFunnel() {
@@ -117,7 +117,7 @@ export default function ConversationalFunnel() {
 
   const handleRoleSelect = (selectedRole: Role) => {
     setRole(selectedRole);
-    // "Curious" fast path: skip region, go straight to form
+    // "Curious" fast path: skip region, go straight to minimal form
     if (selectedRole === "curious") {
       setStep("form");
     } else {
@@ -140,7 +140,7 @@ export default function ConversationalFunnel() {
       phone: formData.phone || undefined,
       company: formData.company || undefined,
       role: role || undefined,
-      intent: undefined, // deprecated field
+      intent: role || undefined, // Store role as intent for backwards compatibility
       region: region || undefined,
       source: "funnel",
     });
@@ -177,7 +177,7 @@ export default function ConversationalFunnel() {
     </div>
   );
 
-  const RoleCard = ({
+  const ChoiceCard = ({
     icon,
     label,
     descriptor,
@@ -186,32 +186,7 @@ export default function ConversationalFunnel() {
   }: {
     icon: string;
     label: string;
-    descriptor: string;
-    onClick: () => void;
-    delay?: number;
-  }) => (
-    <button
-      type="button"
-      className="sc-funnel-role"
-      onClick={onClick}
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      <span className="sc-funnel-role-icon">{icon}</span>
-      <div className="sc-funnel-role-text">
-        <span className="sc-funnel-role-label">{label}</span>
-        <span className="sc-funnel-role-descriptor">{descriptor}</span>
-      </div>
-    </button>
-  );
-
-  const ChoiceCard = ({
-    icon,
-    label,
-    onClick,
-    delay = 0,
-  }: {
-    icon?: string;
-    label: string;
+    descriptor?: string | null;
     onClick: () => void;
     delay?: number;
   }) => (
@@ -221,20 +196,47 @@ export default function ConversationalFunnel() {
       onClick={onClick}
       style={{ animationDelay: `${delay}ms` }}
     >
-      {icon && <span className="sc-funnel-choice-icon">{icon}</span>}
-      <span className="sc-funnel-choice-label">{label}</span>
+      <div className="sc-funnel-choice-icon">{icon}</div>
+      <div>
+        <div className="sc-funnel-choice-label">{label}</div>
+        {descriptor && (
+          <div className="sc-funnel-choice-desc">{descriptor}</div>
+        )}
+      </div>
+    </button>
+  );
+
+  const RegionCard = ({
+    icon,
+    label,
+    onClick,
+    delay = 0,
+  }: {
+    icon: string;
+    label: string;
+    onClick: () => void;
+    delay?: number;
+  }) => (
+    <button
+      type="button"
+      className="sc-funnel-region"
+      onClick={onClick}
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <span className="sc-funnel-region-icon">{icon}</span>
+      <span className="sc-funnel-region-label">{label}</span>
     </button>
   );
 
   return (
     <div className="sc-funnel">
       {/* Step 1: Role Selection */}
-      <BotMessage animate={false}>What brings you here today?</BotMessage>
+      <BotMessage animate={false}>What can I help you with?</BotMessage>
 
       {step === "role" && (
-        <div className="sc-funnel-roles">
+        <div className="sc-funnel-choices">
           {ROLE_OPTIONS.map((opt, i) => (
-            <RoleCard
+            <ChoiceCard
               key={opt.id}
               icon={opt.icon}
               label={opt.label}
@@ -257,9 +259,9 @@ export default function ConversationalFunnel() {
       {step === "region" && (
         <>
           <BotMessage>Where are you based?</BotMessage>
-          <div className="sc-funnel-choices sc-funnel-choices-grid">
+          <div className="sc-funnel-regions">
             {REGION_OPTIONS.map((r, i) => (
-              <ChoiceCard
+              <RegionCard
                 key={r.id}
                 icon="🌍"
                 label={r.label}
@@ -283,7 +285,7 @@ export default function ConversationalFunnel() {
         <>
           <BotMessage>
             {isCuriousFastPath
-              ? "Great! Just your name and email to get started."
+              ? "No problem. Drop your name and email and I'll send you straight to SunClaw."
               : "Almost there. Let me know how to reach you."}
           </BotMessage>
           <form className="sc-funnel-form" onSubmit={handleFormSubmit}>
@@ -334,7 +336,7 @@ export default function ConversationalFunnel() {
               disabled={joinMutation.isPending || !formData.email}
               className="sc-funnel-submit"
             >
-              {joinMutation.isPending ? "Submitting..." : "Let's Go"}
+              {joinMutation.isPending ? "Submitting..." : "Let's Go 🦞"}
             </button>
           </form>
         </>
@@ -358,8 +360,10 @@ export default function ConversationalFunnel() {
             </a>
           </div>
           <p className="sc-funnel-note">
-            You're on the marketplace waitlist. We'll notify you when it
-            launches.
+            Want to deploy your own agent instead?{" "}
+            <a href="/agent/setup" className="sc-funnel-link">
+              Launch the setup wizard →
+            </a>
           </p>
         </>
       )}
