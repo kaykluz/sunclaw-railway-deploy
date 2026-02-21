@@ -546,7 +546,7 @@ export const appRouter = router({
           content: `${input.email}${input.name ? ` (${input.name})` : ""}${input.company ? ` from ${input.company}` : ""} — intent: ${input.intent ?? "unknown"}, region: ${input.region ?? "unknown"}`,
         }).catch(() => {});
 
-        return { ...result, telegramDeepLink: deepLink };
+        return { ...result, telegramDeepLink: result.telegramDeepLink ?? deepLink };
       }),
 
     count: publicProcedure.query(async () => {
