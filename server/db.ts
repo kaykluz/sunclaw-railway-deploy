@@ -107,7 +107,7 @@ export async function getUserByOpenId(openId: string) {
 
 export async function addToWaitlist(
   entry: InsertWaitlistEntry
-): Promise<{ success: boolean; alreadyExists: boolean }> {
+): Promise<{ success: boolean; alreadyExists: boolean; telegramDeepLink?: string | null }> {
   const db = await getDb();
   if (!db) {
     console.warn("[Database] Cannot add to waitlist: database not available");
@@ -116,11 +116,20 @@ export async function addToWaitlist(
 
   try {
     await db.insert(waitlist).values(entry);
-    return { success: true, alreadyExists: false };
+    return { success: true, alreadyExists: false, telegramDeepLink: entry.telegramDeepLink };
   } catch (error: any) {
-    // MySQL duplicate key error code
+    // MySQL duplicate key error code - fetch existing record's deep link
     if (error?.code === "ER_DUP_ENTRY" || error?.errno === 1062) {
-      return { success: true, alreadyExists: true };
+      const existing = await db
+        .select({ telegramDeepLink: waitlist.telegramDeepLink })
+        .from(waitlist)
+        .where(eq(waitlist.email, entry.email))
+        .limit(1);
+      return {
+        success: true,
+        alreadyExists: true,
+        telegramDeepLink: existing[0]?.telegramDeepLink ?? entry.telegramDeepLink,
+      };
     }
     console.error("[Database] Failed to add to waitlist:", error);
     throw error;
